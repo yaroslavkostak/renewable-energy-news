@@ -1,21 +1,21 @@
 ---
-title: "Österreicher wollen schnelleren Erneuerbaren-Ausbau"
-description: "Eine Gallup-Umfrage zeigt, dass die Bevölkerung in Österreich mehr Tempo beim Ausbau erneuerbarer Energien fordert."
-slug: "oeesterreicher-wollen-schnelleren-erneuerbaren-ausbau"
-date: "2026-02-04"
-category: "austria"
-image: "https://oesterreichsenergie.at/typo3conf/ext/kw_kwitstart/Resources/Public/Template/dist/assets/img/blank.gif"
-imageAttribution: "Quelle: Oesterreichs Energie"
-imageDescription: "Bild zeigt Windkraftanlagen"
-imageAlt: "Windkraftanlagen in einer Landschaft"
+title: Österreicher wollen schnelleren Erneuerbaren-Ausbau
+description: 'Eine Gallup-Umfrage zeigt, dass die Bevölkerung in Österreich mehr Tempo beim Ausbau erneuerbarer Energien fordert.'
+slug: oeesterreicher-wollen-schnelleren-erneuerbaren-ausbau
+date: '2026-02-04'
+category: austria
+image: 'https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=800'
+imageAttribution: 'Quelle: Oesterreichs Energie'
+imageDescription: Bild zeigt Windkraftanlagen
+imageAlt: Windkraftanlagen in einer Landschaft
 tags:
   - Energiewende
   - Erneuerbare Energien
   - Photovoltaik
   - Windkraft
   - Versorgungssicherheit
-sourceUrl: "https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/bevoelkerung-will-mehr-tempo-beim-erneuerbaren-ausbau"
-sourceName: "oesterreichsenergie.at"
+sourceUrl: 'https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/bevoelkerung-will-mehr-tempo-beim-erneuerbaren-ausbau'
+sourceName: oesterreichsenergie.at
 ---
 
 # Bevölkerung will mehr Tempo beim Erneuerbaren-Ausbau

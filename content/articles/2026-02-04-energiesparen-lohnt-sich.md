@@ -1,21 +1,21 @@
 ---
-title: "Energiesparen lohnt sich für Haushalte"
-description: "Tipps zum Einsparen von Energie für österreichische Haushalte und deren Auswirkungen auf den Verbrauch."
-slug: "energiesparen-lohnt-sich"
-date: "2026-02-04"
-category: "austria"
-image: "https://oesterreichsenergie.at/typo3conf/ext/kw_kwitstart/Resources/Public/Template/dist/assets/img/blank.gif"
-imageAttribution: "Quelle: AdobeStock (slavun)"
-imageDescription: "Grafik zum Energiesparen"
-imageAlt: "Grafik zum Thema Energieeinsparung"
+title: Energiesparen lohnt sich für Haushalte
+description: Tipps zum Einsparen von Energie für österreichische Haushalte und deren Auswirkungen auf den Verbrauch.
+slug: energiesparen-lohnt-sich
+date: '2026-02-04'
+category: austria
+image: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800'
+imageAttribution: 'Quelle: AdobeStock (slavun)'
+imageDescription: Grafik zum Energiesparen
+imageAlt: Grafik zum Thema Energieeinsparung
 tags:
   - Energie
   - Energiesparen
   - Klimaschutz
   - Nachhaltigkeit
   - Erneuerbare Energien
-sourceUrl: "https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/bringt-energiesparen-ueberhaupt-etwas"
-sourceName: "oesterreichsenergie.at"
+sourceUrl: 'https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/bringt-energiesparen-ueberhaupt-etwas'
+sourceName: oesterreichsenergie.at
 ---
 
 # Bringt Energiesparen überhaupt etwas

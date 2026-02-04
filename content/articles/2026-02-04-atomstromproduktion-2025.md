@@ -1,21 +1,21 @@
 ---
-title: "Anstieg der Atomstromproduktion 2025"
-description: "Die Atomstromproduktion wird 2025 auf zehn Prozent der globalen Stromerzeugung steigen und wird von China dominiert."
-slug: "atomstromproduktion-2025"
-date: "2026-02-04"
-category: "austria"
-image: "https://oesterreichsenergie.at/typo3conf/ext/kw_kwitstart/Resources/Public/Template/dist/assets/img/blank.gif"
-imageAttribution: "Quelle: Unsplash"
-imageDescription: "Grafik zur Atomkraft"
-imageAlt: "Symbolbild für Atomkraft und Energieproduktion"
+title: Anstieg der Atomstromproduktion 2025
+description: Die Atomstromproduktion wird 2025 auf zehn Prozent der globalen Stromerzeugung steigen und wird von China dominiert.
+slug: atomstromproduktion-2025
+date: '2026-02-04'
+category: austria
+image: 'https://images.unsplash.com/photo-1559302504-64aae0ca2a3d?w=800'
+imageAttribution: 'Quelle: Unsplash'
+imageDescription: Grafik zur Atomkraft
+imageAlt: Symbolbild für Atomkraft und Energieproduktion
 tags:
   - Atomkraft
   - Energieproduktion
   - Klimaneutralität
   - Energiewende
   - Erneuerbare Energien
-sourceUrl: "https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/atomstrom-rekord-fuer-2025-erwartet"
-sourceName: "oesterreichsenergie.at"
+sourceUrl: 'https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/atomstrom-rekord-fuer-2025-erwartet'
+sourceName: oesterreichsenergie.at
 ---
 
 # Atomstrom-Rekord für 2025 erwartet

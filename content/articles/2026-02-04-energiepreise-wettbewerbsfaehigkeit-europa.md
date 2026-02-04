@@ -1,13 +1,13 @@
 ---
-title: "Energiepreise und Wettbewerbsfähigkeit in Europa"
-description: "Österreichs Energie spricht über Wettbewerbsfähigkeit und Energiepreise im internationalen Umfeld."
-slug: "energiepreise-wettbewerbsfaehigkeit-europa"
-date: "2026-02-04"
-category: "austria"
-image: "https://oesterreichsenergie.at/typo3conf/ext/kw_kwitstart/Resources/Public/Template/dist/assets/img/blank.gif"
-imageAttribution: "Quelle: AdobeStock (authapol)"
-imageDescription: "Brüssel und Energiepolitik"
-imageAlt: "Symbolbild zur Energiediskussion in Brüssel"
+title: Energiepreise und Wettbewerbsfähigkeit in Europa
+description: Österreichs Energie spricht über Wettbewerbsfähigkeit und Energiepreise im internationalen Umfeld.
+slug: energiepreise-wettbewerbsfaehigkeit-europa
+date: '2026-02-04'
+category: austria
+image: 'https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=800'
+imageAttribution: 'Quelle: AdobeStock (authapol)'
+imageDescription: Brüssel und Energiepolitik
+imageAlt: Symbolbild zur Energiediskussion in Brüssel
 tags:
   - Energiepreise
   - Wettbewerbsfähigkeit
@@ -15,8 +15,8 @@ tags:
   - Investitionen
   - Österreich
   - Marktintegration
-sourceUrl: "https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/bruessel-energie-im-internationalen-wettbewerb"
-sourceName: "oesterreichsenergie.at"
+sourceUrl: 'https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/bruessel-energie-im-internationalen-wettbewerb'
+sourceName: oesterreichsenergie.at
 ---
 
 # Energiepreise und Wettbewerbsfähigkeit in Europa
