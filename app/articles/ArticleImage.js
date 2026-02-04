@@ -11,18 +11,26 @@ export default function ArticleImage({ src, alt, attribution }) {
   const url = error || !src ? FALLBACK_SVG : src;
 
   return (
-    <div className="article-header-image">
-      <img
-        src={url}
-        alt={alt || ''}
-        loading="eager"
-        decoding="async"
-        referrerPolicy="no-referrer"
-        onError={() => setError(true)}
-      />
-      {attribution && (
-        <p className="image-attribution">{attribution}</p>
-      )}
-    </div>
+    <figure className="article-header-image">
+      <div className="article-header-image-frame">
+        <img
+          src={url}
+          alt={alt || ''}
+          loading="eager"
+          decoding="async"
+          referrerPolicy="no-referrer"
+          onError={() => setError(true)}
+        />
+      </div>
+      <figcaption className="image-attribution">
+        {attribution?.trim() ? (
+          attribution.trimStart().toLowerCase().startsWith('quelle:')
+            ? attribution.trim()
+            : `Quelle: ${attribution.trim()}`
+        ) : (
+          'Quelle: Bildquelle nicht angegeben'
+        )}
+      </figcaption>
+    </figure>
   );
 }

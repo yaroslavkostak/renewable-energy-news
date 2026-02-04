@@ -3,7 +3,18 @@ import Link from 'next/link';
 import { getPopularTags, CATEGORY_LABELS } from '../lib/articles';
 import Header from './Header';
 
+function getMetadataBase() {
+  if (process.env.NEXT_PUBLIC_SITE_URL) {
+    const u = process.env.NEXT_PUBLIC_SITE_URL;
+    return new URL(u.startsWith('http') ? u : `https://${u}`);
+  }
+  if (process.env.VERCEL_URL)
+    return new URL(`https://${process.env.VERCEL_URL}`);
+  return new URL('https://renewable-energy-news.vercel.app');
+}
+
 export const metadata = {
+  metadataBase: getMetadataBase(),
   title: 'Erneuerbare Energie – News für Österreich',
   description: 'Aktuelle Nachrichten zu Solar, Wind und grüner Energie für den österreichischen Markt.',
   robots: 'noindex, nofollow',
