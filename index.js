@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 /**
  * Renewable Energy News – automated collection, AI rewriting, and Git push.
- * Run via: node index.js
- * Designed for GitHub Actions (e.g. 3x daily).
+ * Run via: node index.js  (or npm run collect)
+ * Loads OPENAI_API_KEY from .env if present. In GitHub Actions use Secrets.
  */
 
+import 'dotenv/config';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -188,7 +189,7 @@ function normalizeUrl(url) {
 }
 
 // --- ChatGPT: rewrite and structure content (simple style, Austrian angle)
-const ARTICLE_STYLE = `Stil der Artikel: einfach und klar. Kurze Sätze, ein Gedanke pro Absatz. Keine überladenen Formulierungen. Überschriften ohne Title Case (nicht jedes Wort groß). Bildquelle als "Foto [Quellenname]" ohne Link.`;
+const ARTICLE_STYLE = `Stil der Artikel: einfach und klar. Kurze Sätze, ein Gedanke pro Absatz. Keine überladenen Formulierungen, keine Doppelpunkte/Semikolons, keine langen Gedankenstriche (—). Keine Aufzählungslisten, keine Tabellen – nur Fließtext und H2-Überschriften. Überschriften ohne Title Case (nicht jedes Wort groß). Bildquelle als "Foto [Quellenname]" ohne Link.`;
 
 const SYSTEM_PROMPT = `Du bist Redakteur für eine österreichische Website zu erneuerbarer Energie. Alle Texte auf Deutsch für den österreichischen Markt.
 
@@ -224,7 +225,7 @@ Antworte ausschließlich mit einem JSON-Objekt (kein anderer Text davor oder dan
 - "h1": string (Hauptüberschrift)
 - "intro": string (kurzer Einleitungsabsatz mit österreichischem Bezug wo sinnvoll)
 - "toc": string[] (H2-Überschriften für Inhaltsübersicht; bei kurzen Artikeln leeres Array)
-- "body": string (Markdown: H2 und Absätze; keine H1; wo passend Kosten in Alltagsgrößen, Mieter-Tipps, sachliche Öko-Einordnung)
+- "body": string (Markdown: nur H2 und Absätze als Fließtext; keine H1, keine Listen, keine Tabellen, keine langen Gedankenstriche; wo passend Kosten in Alltagsgrößen, Mieter-Tipps, sachliche Öko-Einordnung)
 - "umfassendeGedanken": string (Abschnitt "Umfassende Gedanken")
 - "faq": string[] (optional: 0–3 Einträge im Format "Frage|Antwort", z.B. "Funktioniert PV im Winter?|Ja, auch bei Schnee...")
 - "imageAttribution": string (z.B. "Foto Quelle" ohne Link)`;

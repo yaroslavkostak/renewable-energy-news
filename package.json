@@ -13,9 +13,10 @@
   "keywords": ["rss", "news", "openai", "markdown", "vercel"],
   "license": "MIT",
   "engines": {
-    "node": ">=18"
+    "node": "20.x"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "axios": "^1.7.7",
     "cheerio": "^1.0.0",
     "gray-matter": "^4.0.3",
