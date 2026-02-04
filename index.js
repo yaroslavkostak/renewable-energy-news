@@ -70,6 +70,31 @@ async function fetchPage(url) {
   return { text: text.slice(0, 50000), imageUrl, sourceName };
 }
 
+// --- Stock image (Unsplash) when article has no image
+function keywordFromText(titleOrText) {
+  const s = (titleOrText || '').replace(/[^\w\säöüÄÖÜß-]/gi, ' ').replace(/\s+/g, ' ').trim();
+  const words = s.split(' ').filter((w) => w.length > 2).slice(0, 4);
+  if (words.length) return words.join(' ');
+  return 'solar panels renewable energy';
+}
+
+async function fetchStockImage(keyword) {
+  const key = process.env.UNSPLASH_ACCESS_KEY;
+  if (!key) return null;
+  try {
+    const q = encodeURIComponent(keyword);
+    const { data } = await axios.get(
+      `https://api.unsplash.com/search/photos?query=${q}&per_page=1&client_id=${key}`,
+      { timeout: 8000 }
+    );
+    const hit = data?.results?.[0];
+    if (hit?.urls?.regular) return { imageUrl: hit.urls.regular, imageSource: 'Unsplash' };
+  } catch (err) {
+    console.warn('[Unsplash]', err.message);
+  }
+  return null;
+}
+
 // --- Normalize feed entry (string URL or { url, priority, category, name })
 function normalizeFeedEntry(entry) {
   if (typeof entry === 'string') {
@@ -188,29 +213,38 @@ function normalizeUrl(url) {
   }
 }
 
-// --- ChatGPT: rewrite and structure content (simple style, Austrian angle)
-const ARTICLE_STYLE = `Stil der Artikel: einfach und klar. Kurze Sätze, ein Gedanke pro Absatz. Keine überladenen Formulierungen, keine Doppelpunkte/Semikolons, keine langen Gedankenstriche (—). Keine Aufzählungslisten, keine Tabellen – nur Fließtext und H2-Überschriften. Überschriften ohne Title Case (nicht jedes Wort groß). Bildquelle als "Foto [Quellenname]" ohne Link.`;
+// --- ChatGPT: rewrite and structure content (rephrase only, no padding)
+const ARTICLE_STYLE = `Stil: einfach und klar. Kurze Sätze, ein Gedanke pro Absatz. Keine Listen/Tabellen – nur Fließtext und H2. Überschriften ohne Title Case. Bild: Immer Bildquelle angeben (z.B. "Foto Unsplash" oder "Foto [Quellenname]") ohne Link, dazu 3–5 Wörter Beschreibung was auf dem Bild zu sehen ist und einen kurzen Alt-Text der zur Nachricht passt.
 
-const SYSTEM_PROMPT = `Du bist Redakteur für eine österreichische Website zu erneuerbarer Energie. Alle Texte auf Deutsch für den österreichischen Markt.
+**Strikte Zeichenregel – unbedingt einhalten:** In Überschriften (H1, H2, seoTitle) und im gesamten Fließtext (intro, body, umfassendeGedanken) dürfen weder Doppelpunkt (:) noch Semikolon (;) noch langer Gedankenstrich (— oder –) vorkommen. Stattdessen Punkte, Kommas oder kurze Bindestriche mit Leerzeichen " - " verwenden. Diese Regel gilt für die komplette Ausgabe.`;
+
+const SYSTEM_PROMPT = `Du bist Redakteur für eine österreichische Website zu erneuerbarer Energie. Ausgabe immer auf Deutsch für den österreichischen Markt.
+
+Wichtig – nur umformulieren, nicht aufblähen:
+- Jeden Absatz und jede Überschrift des Originals nur sprachlich umformulieren (jedes Satz neu formulieren). Keinen neuen Inhalt erfinden und nichts weglassen, was sachlich wichtig ist.
+- Kurze Meldung bleibt kurz. Lange Quelle darf auf bis zu 1000 Wörter gebracht werden, wenn der Stoff es hergibt. Niemals kurze News künstlich auf 1000 Wörter strecken.
+- Quelle auf Deutsch (z.B. PV Magazine Germany, Solarserver): nur umformulieren – Überschriften und Absätze Satz für Satz auf Deutsch neu schreiben, österreichischen Bezug wo sinnvoll, Länge an die Quelle anpassen (kurz bleibt kurz, längere bis max. 1000 Wörter).
+- Quelle auf Englisch oder Französisch (z.B. CleanTechnica, Electrek, PV Magazine France): in einem einzigen Schritt direkt auf Deutsch reraiten. Nicht zuerst in der Ausgangssprache umformulieren und dann übersetzen – sofort in unserem Stil auf Österreich-Deutsch ausgeben (jeden Satz sinngemäß übertragen, gleiche Längenlogik, kurz bleibt kurz).
 
 ${ARTICLE_STYLE}
 
-Sprache und Struktur:
-- Natürlich und menschlich. Keine übermäßigen Doppelpunkte, Semikolons oder Bindestriche.
-- H1 und mehrere H2. Einleitung: ein kurzer Absatz mit der Hauptnachricht.
-- Bei längeren Artikeln: "Inhaltsübersicht" am Anfang. Headlines: griffig, etwas provokant.
+Struktur:
+- H1, ein kurzer Einleitungsabsatz, dann 2–5 H2-Abschnitte (nicht mehr). Pro Abschnitt unterschiedlich viele Absätze: mal 2, mal 3, mal 4 – nicht alle Abschnitte gleich, wirkt sonst schablonenhaft. Länge variieren (mal kürzer, mal länger). Ziel: redaktioneller Nachrichtenartikel.
+- "Inhaltsübersicht": nur wenn der Artikel mindestens 3 H2 hat; toc = exakt die H2-Überschriften im gleichen Wortlaut wie im body (keine Slugs).
+- Am Ende ein Schlussabschnitt mit einer inhaltlichen H2-Überschrift wie die anderen (z.B. "Bedeutung der Modernisierung für Österreich") – kein generisches "Fazit" oder "Umfassende Gedanken", sondern eine echte Überschrift zum Inhalt in "schlussAbschnitt" angeben. "Häufige Fragen" weglassen – bei normalen Nachrichten wirkt FAQ wie Verkauf. Nur bei ausdrücklichen FAQ-Guides 1–3 Einträge; sonst faq immer leeres Array.
+- Österreich-Bezug wo passend.
 
-Österreich-Bezug: Jede Meldung mit österreichischem Blickwinkel (z.B. "Was bedeutet das für Wien?", "Bald in Österreich?"). Kein reines Übersetzen – lokale Einordnung.
-
-Praktischer Nutzen: Wo möglich Kosten in Alltagsgrößen (Kaffee, Netflix). Tipps für Mieter wenn relevant. Ökologie sachlich (Unabhängigkeit von Gaspreisen).
-
-Struktur: Am Ende immer "Umfassende Gedanken" (nicht "Fazit"). Optional "Häufige Fragen" (1–3 Fragen mit kurzen Antworten).`;
+Links im Fließtext:
+- Im body 2–5 sinnvolle Links als Markdown [Text](URL) einbauen. Lieber 1–2 gute Links setzen als viele. Mindestens 1–2 ausgehende Links (z.B. zur Quelle, zu offiziellen Seiten wie E-Control, Klimafonds, Ministerium).
+- Links nur im Fließtext: nie in H2-Überschriften, nie in den ersten Wörtern eines Absatzes – natürlich in der Mitte oder am Ende von Sätzen platzieren.
+- Nur verlinken, wo es inhaltlich passt (z.B. "auf der [Website des Klimafonds](url)", "laut [E-Control](url)").`;
 
 const USER_PROMPT_TEMPLATE = `Verarbeite die folgende Nachricht zu einem vollständigen Artikel mit österreichischem Bezug und praktischem Nutzen.
 
 **Quelle:** {{sourceName}}
 **URL:** {{url}}
 **Bild-URL (falls vorhanden):** {{imageUrl}}
+**Bildquelle (wenn von Stock, z.B. Unsplash):** {{imageSource}}
 **Region/Kategorie der Quelle:** {{category}}
 
 **Rohtext:**
@@ -219,16 +253,20 @@ const USER_PROMPT_TEMPLATE = `Verarbeite die folgende Nachricht zu einem vollst�
 ---
 
 Antworte ausschließlich mit einem JSON-Objekt (kein anderer Text davor oder danach) mit exakt diesen Schlüsseln:
-- "seoTitle": string (SEO-Titel, griffig)
-- "seoDescription": string (Meta-Beschreibung, ca. 150 Zeichen)
+- "seoTitle": string (einzigartiger SEO-Titel, genau 5–6 Wörter, griffig; ohne : ; — –)
+- "seoDescription": string (Meta-Beschreibung, ca. 140–155 Zeichen, prägnant; ohne : ; — –)
 - "slug": string (URL-Slug, klein, Bindestriche, nur a-z 0-9)
-- "h1": string (Hauptüberschrift)
-- "intro": string (kurzer Einleitungsabsatz mit österreichischem Bezug wo sinnvoll)
-- "toc": string[] (H2-Überschriften für Inhaltsübersicht; bei kurzen Artikeln leeres Array)
-- "body": string (Markdown: nur H2 und Absätze als Fließtext; keine H1, keine Listen, keine Tabellen, keine langen Gedankenstriche; wo passend Kosten in Alltagsgrößen, Mieter-Tipps, sachliche Öko-Einordnung)
-- "umfassendeGedanken": string (Abschnitt "Umfassende Gedanken")
-- "faq": string[] (optional: 0–3 Einträge im Format "Frage|Antwort", z.B. "Funktioniert PV im Winter?|Ja, auch bei Schnee...")
-- "imageAttribution": string (z.B. "Foto Quelle" ohne Link)`;
+- "h1": string (Hauptüberschrift, ohne : ; — –)
+- "intro": string (kurzer Einleitungsabsatz mit österreichischem Bezug wo sinnvoll, ohne : ; — –)
+- "toc": string[] (nur wenn Artikel mindestens 3 H2 hat, exakt die H2-Überschriften wie im body, keine Slugs, sonst leeres Array; jede Überschrift ohne : ; — –)
+- "body": string (Markdown: 2–5 H2, pro H2 unterschiedlich 2–4 Absätze, Fließtext, maximal 5 Links [Text](URL), davon 1–2 ausgehend, nie in Überschriften, nie am Absatzanfang; im gesamten body keine Zeichen : ; — –)
+- "schlussAbschnitt": string (inhaltsbezogene Schluss-Überschrift wie die anderen H2, z.B. "Bedeutung der Modernisierung für Österreich" oder "Ausblick auf die Versorgungssicherheit" – kein generisches "Fazit" oder "Umfassende Gedanken", ohne : ; — –)
+- "umfassendeGedanken": string (Inhalt des Schlussabschnitts, ohne : ; — –)
+- "faq": string[] (für normale Nachrichten immer leeres Array []; nur bei ausdrücklichen FAQ-Guides 1–3 Einträge "Frage|Antwort")
+- "imageAttribution": string (Format: "Quelle: [Bildquelle, z.B. Unsplash oder Name] ([sourceName])", ohne Link)
+- "imageDescription": string (3–5 Wörter, was auf dem Bild zu sehen ist)
+- "imageAlt": string (Alt-Text, zur Barrierefreiheit, passt zur Nachricht)
+- "tags": string[] (3–6 Stichwörter für Beliebte Themen, z.B. Solar, Wind, Speicher, Subvention, Balkonkraftwerk, Energiegemeinschaft, Förderung, PV, Klimaneutralität – passend zum Inhalt, gleiche Begriffe wie in der Sidebar nutzbar)`;
 
 async function rewriteWithChatGPT(rawText, meta) {
   const apiKey = process.env.OPENAI_API_KEY;
@@ -238,6 +276,7 @@ async function rewriteWithChatGPT(rawText, meta) {
     .replace('{{sourceName}}', meta.sourceName || 'Unbekannt')
     .replace('{{url}}', meta.url)
     .replace('{{imageUrl}}', meta.imageUrl || '')
+    .replace('{{imageSource}}', meta.imageSource || '')
     .replace('{{category}}', meta.category || 'global')
     .replace('{{rawText}}', (rawText || '').slice(0, 80000));
 
@@ -257,7 +296,36 @@ async function rewriteWithChatGPT(rawText, meta) {
   const jsonStart = text.indexOf('{');
   const jsonEnd = text.lastIndexOf('}') + 1;
   if (jsonStart >= 0 && jsonEnd > jsonStart) text = text.slice(jsonStart, jsonEnd);
-  return JSON.parse(text);
+  const payload = JSON.parse(text);
+  return sanitizePayloadNoColonSemicolonDash(payload);
+}
+
+/** Strikte Regel: Keine : ; — – in Überschriften und Fließtext. */
+function sanitizePayloadNoColonSemicolonDash(payload) {
+  const replaceIn = (s) => {
+    if (typeof s !== 'string') return s;
+    return s
+      .replace(/\u2014/g, ' - ')
+      .replace(/\u2013/g, ' - ')
+      .replace(/;\s*/g, ', ')
+      .replace(/\s:\s/g, '. ')
+      .replace(/([^\s]):\s/g, '$1. ')
+      .trim();
+  };
+  const replaceInBody = (s) => {
+    if (typeof s !== 'string') return s;
+    return s
+      .replace(/\u2014/g, ' - ')
+      .replace(/\u2013/g, ' - ')
+      .replace(/;\s*/g, ', ')
+      .replace(/\s:\s/g, '. ')
+      .trim();
+  };
+  const fields = ['seoTitle', 'seoDescription', 'h1', 'intro', 'schlussAbschnitt', 'umfassendeGedanken'];
+  for (const k of fields) if (payload[k]) payload[k] = replaceIn(payload[k]);
+  if (payload.toc && Array.isArray(payload.toc)) payload.toc = payload.toc.map(replaceIn);
+  if (payload.body) payload.body = replaceInBody(payload.body);
+  return payload;
 }
 
 // --- Build Markdown with frontmatter
@@ -271,17 +339,27 @@ function buildMarkdown(payload, meta) {
     category: meta.category || 'global',
     ...(meta.imageUrl && { image: meta.imageUrl }),
     ...(payload.imageAttribution && { imageAttribution: payload.imageAttribution }),
+    ...(payload.imageDescription && { imageDescription: payload.imageDescription }),
+    ...(payload.imageAlt && { imageAlt: payload.imageAlt }),
+    ...(payload.tags && Array.isArray(payload.tags) && payload.tags.length > 0 && { tags: payload.tags }),
     sourceUrl: meta.url,
     sourceName: meta.sourceName || '',
   };
-  const fm = ['---', ...Object.entries(frontmatter).map(([k, v]) => `${k}: ${JSON.stringify(String(v))}`), '---'].join('\n');
+  const fmLines = ['---'];
+  for (const [k, v] of Object.entries(frontmatter)) {
+    if (Array.isArray(v)) fmLines.push(`${k}:\n${v.map((t) => `  - ${t}`).join('\n')}`);
+    else fmLines.push(`${k}: ${JSON.stringify(String(v))}`);
+  }
+  fmLines.push('---');
+  const fm = fmLines.join('\n');
   let body = `# ${payload.h1}\n\n${payload.intro}\n\n`;
   if (payload.toc && payload.toc.length > 0) {
     body += '## Inhaltsübersicht\n\n';
     body += payload.toc.map((h) => `- ${h}`).join('\n') + '\n\n';
   }
   body += payload.body + '\n\n';
-  body += '## Umfassende Gedanken\n\n' + payload.umfassendeGedanken + '\n';
+  const closingTitle = payload.schlussAbschnitt || 'Umfassende Gedanken';
+  body += `## ${closingTitle}\n\n${payload.umfassendeGedanken}\n`;
   if (payload.faq && Array.isArray(payload.faq) && payload.faq.length > 0) {
     body += '\n## Häufige Fragen\n\n';
     for (const entry of payload.faq) {
@@ -379,7 +457,17 @@ async function main() {
       processedSet.add(normalizeUrl(item.url));
       continue;
     }
-    const meta = { url: item.url, sourceName, imageUrl, category: item.category, priority: item.priority };
+    let imageSource = '';
+    if (!imageUrl && process.env.UNSPLASH_ACCESS_KEY) {
+      const keyword = keywordFromText(item.title || rawText);
+      const stock = await fetchStockImage(keyword);
+      if (stock) {
+        imageUrl = stock.imageUrl;
+        imageSource = stock.imageSource || 'Unsplash';
+        console.log(`[Image] Stock (${imageSource}): ${keyword}`);
+      }
+    }
+    const meta = { url: item.url, sourceName, imageUrl, imageSource, category: item.category, priority: item.priority };
     try {
       const payload = await rewriteWithChatGPT(rawText, meta);
       const markdown = buildMarkdown(payload, meta);

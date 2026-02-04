@@ -8,7 +8,8 @@
     "start": "next start",
     "dev": "next dev",
     "build": "next build",
-    "collect": "node index.js"
+    "collect": "node index.js",
+    "check-feeds": "node check-feeds.js"
   },
   "keywords": ["rss", "news", "openai", "markdown", "vercel"],
   "license": "MIT",
