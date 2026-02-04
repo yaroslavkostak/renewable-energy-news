@@ -1,0 +1,29 @@
+{
+  "name": "renewable-energy-news",
+  "version": "1.0.0",
+  "description": "Automated news collection, AI rewriting for Austrian market, and GitHub deployment",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "next start",
+    "dev": "next dev",
+    "build": "next build",
+    "collect": "node index.js"
+  },
+  "keywords": ["rss", "news", "openai", "markdown", "vercel"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cheerio": "^1.0.0",
+    "gray-matter": "^4.0.3",
+    "next": "^14.2.0",
+    "openai": "^4.52.0",
+    "react": "^18.2.0",
+    "react-markdown": "^9.0.1",
+    "react-dom": "^18.2.0",
+    "rss-parser": "^3.13.0"
+  }
+}
