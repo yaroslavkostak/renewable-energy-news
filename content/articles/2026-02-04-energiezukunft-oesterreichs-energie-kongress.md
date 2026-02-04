@@ -4,8 +4,8 @@ description: "Rückblick auf den Oesterreichs Energie Kongress 2023 mit Fokus au
 slug: "energiezukunft-oesterreichs-energie-kongress"
 date: "2026-02-04"
 category: "austria"
-image: "https://oesterreichsenergie.at/typo3conf/ext/kw_kwitstart/Resources/Public/Template/dist/assets/img/blank.gif"
-imageAttribution: "Quelle: Oesterreichs Energie (Bild fehlt)"
+image: "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=800"
+imageAttribution: "Quelle: Unsplash"
 imageDescription: "Energiekongress mit vielen Teilnehmern"
 imageAlt: "Energiekongress 2023 digital und interaktiv"
 tags:

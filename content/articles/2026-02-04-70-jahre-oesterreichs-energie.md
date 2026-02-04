@@ -4,8 +4,8 @@ description: "Feiern Sie mit uns 70 Jahre Österreichs Energie und den Wandel de
 slug: "70-jahre-oesterreichs-energie"
 date: "2026-02-04"
 category: "austria"
-image: "https://oesterreichsenergie.at/typo3conf/ext/kw_kwitstart/Resources/Public/Template/dist/assets/img/blank.gif"
-imageAttribution: "Quelle: Foto Martin Hörmandinger"
+image: "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=800"
+imageAttribution: "Quelle: Unsplash"
 imageDescription: "Visualisierung von Stromerzeugung"
 imageAlt: "Stromerzeugung in Österreich"
 tags:

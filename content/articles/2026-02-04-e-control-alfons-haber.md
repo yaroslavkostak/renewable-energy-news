@@ -4,8 +4,8 @@ description: "Alfons Haber von E-Control über den Netzausbau und die Herausford
 slug: "e-control-alfons-haber"
 date: "2026-02-04"
 category: "austria"
-image: "https://oesterreichsenergie.at/typo3conf/ext/kw_kwitstart/Resources/Public/Template/dist/assets/img/blank.gif"
-imageAttribution: "Quelle: E-Control (E-Control)"
+image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800"
+imageAttribution: "Quelle: Unsplash"
 imageDescription: "Alfons Haber bei einer Pressekonferenz"
 imageAlt: "Alfons Haber von E-Control erklärt Energiethemen"
 tags:

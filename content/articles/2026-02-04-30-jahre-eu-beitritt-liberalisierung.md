@@ -4,8 +4,8 @@ description: "Die Liberalisierung der Energiemärkte brachte für Österreich Vo
 slug: "30-jahre-eu-beitritt-liberalisierung"
 date: "2026-02-04"
 category: "austria"
-image: "https://oesterreichsenergie.at/typo3conf/ext/kw_kwitstart/Resources/Public/Template/dist/assets/img/blank.gif"
-imageAttribution: "Quelle: AdobeStock (Miha Creative)"
+image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800"
+imageAttribution: "Quelle: Unsplash"
 imageDescription: "Symbolbild zur Energiewirtschaft"
 imageAlt: "Grafik zur Energiepreisentwicklung"
 tags:

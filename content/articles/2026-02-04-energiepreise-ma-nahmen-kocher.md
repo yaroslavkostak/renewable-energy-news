@@ -4,8 +4,8 @@ description: "Wirtschaftsminister Martin Kocher spricht über Energiepreise und 
 slug: "energiepreise-maßnahmen-kocher"
 date: "2026-02-04"
 category: "austria"
-image: "https://oesterreichsenergie.at/typo3conf/ext/kw_kwitstart/Resources/Public/Template/dist/assets/img/blank.gif"
-imageAttribution: "Quelle: Österreichs Energie (Österreichs Energie)"
+image: "https://images.unsplash.com/photo-1559302504-64aae0ca2a3d?w=800"
+imageAttribution: "Quelle: Unsplash"
 imageDescription: "Martin Kocher spricht zu Energiefragen"
 imageAlt: "Wirtschaftsminister Martin Kocher bei einem Interview zum Thema Energiepreise"
 tags:

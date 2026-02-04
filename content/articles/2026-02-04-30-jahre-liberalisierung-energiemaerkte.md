@@ -4,8 +4,8 @@ description: "Was brachte die Liberalisierung der Energiemärkte in Österreich 
 slug: "30-jahre-liberalisierung-energiemaerkte"
 date: "2026-02-04"
 category: "austria"
-image: "https://oesterreichsenergie.at/typo3conf/ext/kw_kwitstart/Resources/Public/Template/dist/assets/img/blank.gif"
-imageAttribution: "Foto AdobeStock (plattenkueche)"
+image: "https://images.unsplash.com/photo-1559302504-64aae0ca2a3d?w=800"
+imageAttribution: "Quelle: Unsplash"
 imageDescription: "Illustration zur Energiemarktliberalisierung"
 imageAlt: "Energiewirtschaft und Marktliberalisierung"
 tags:

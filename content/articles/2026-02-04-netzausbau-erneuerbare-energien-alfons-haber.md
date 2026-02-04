@@ -4,8 +4,8 @@ description: "Alfons Haber von E-Control sieht Handlungsbedarf beim Netzausbau f
 slug: "netzausbau-erneuerbare-energien-alfons-haber"
 date: "2026-02-04"
 category: "austria"
-image: "https://oesterreichsenergie.at/typo3conf/ext/kw_kwitstart/Resources/Public/Template/dist/assets/img/blank.gif"
-imageAttribution: "Quelle: Oesterreichs Energie (Oesterreichs Energie)"
+image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800"
+imageAttribution: "Quelle: Unsplash"
 imageDescription: "Alfons Haber bei einer Sitzung"
 imageAlt: "Alfons Haber von E-Control spricht über Netzfragen"
 tags:

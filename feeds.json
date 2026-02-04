@@ -1,5 +1,5 @@
 {
-  "maxArticlesPerRun": 10,
+  "maxArticlesPerRun": 1,
   "rssFeeds": [
     { "url": "https://www.klimafonds.gv.at/feed/", "priority": 1, "category": "austria", "name": "Klimafonds" },
     { "url": "https://www.pv-magazine.de/feed/", "priority": 2, "category": "germany", "name": "PV Magazine Germany" },

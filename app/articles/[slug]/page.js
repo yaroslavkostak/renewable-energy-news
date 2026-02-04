@@ -57,9 +57,24 @@ export async function generateMetadata({ params }) {
   if (!slug || slug === '_no_articles_yet') return {};
   const article = getArticleBySlug(slug);
   if (!article) return {};
+  const rawTime =
+    article.time && typeof article.time === 'string' ? article.time.replace('.', ':') : '';
+  const timeNorm = /^\d{1,2}:\d{2}$/.test(rawTime) ? `${rawTime}:00` : rawTime || null;
+  const dateTime =
+    article.date && timeNorm
+      ? `${article.date}T${timeNorm}`
+      : article.date
+        ? `${article.date}T12:00:00`
+        : null;
   return {
     title: article.title,
     description: article.description || undefined,
+    openGraph: {
+      title: article.title,
+      description: article.description || undefined,
+      type: 'article',
+      ...(dateTime && { publishedTime: dateTime }),
+    },
   };
 }
 
@@ -85,14 +100,16 @@ export default function ArticlePage({ params }) {
   }
 
   const dateStr = article.date
-    ? new Date(article.date).toLocaleDateString('de-AT', {
+    ? new Date(article.date + 'T12:00:00').toLocaleDateString('de-AT', {
         day: '2-digit',
         month: 'long',
         year: 'numeric',
       })
     : '';
+  const timeStr = article.time ? `, ${article.time} Uhr` : '';
 
-  const tocHeadings = extractH2FromContent(article.content);
+  const tocHeadingsRaw = extractH2FromContent(article.content);
+  const tocHeadings = tocHeadingsRaw.filter((h, i, arr) => arr.findIndex((x) => x.slug === h.slug) === i);
   const bodyContent = contentWithoutTocBlock(article.content);
   const { firstPart, restPart } = splitBodyAfterFirstParagraph(bodyContent);
   const showToc = tocHeadings.length >= 3;
@@ -116,8 +133,7 @@ export default function ArticlePage({ params }) {
         <header className="article-header">
           <h1>{article.title}</h1>
           <div className="article-meta">
-            {dateStr}
-            {article.sourceName && ` · ${article.sourceName}`}
+            {dateStr}{timeStr}
           </div>
           {article.image && (
             <div style={{ marginTop: 16 }}>

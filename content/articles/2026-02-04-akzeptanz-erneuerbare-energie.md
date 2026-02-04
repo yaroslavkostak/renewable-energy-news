@@ -4,8 +4,8 @@ description: "Studien zeigen hohe Zustimmung zu Erneuerbaren in Österreich. Akz
 slug: "akzeptanz-erneuerbare-energie"
 date: "2026-02-04"
 category: "austria"
-image: "https://oesterreichsenergie.at/typo3conf/ext/kw_kwitstart/Resources/Public/Template/dist/assets/img/blank.gif"
-imageAttribution: "Quelle: Österreichs Energie (oesterreichsenergie.at)"
+image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800"
+imageAttribution: "Quelle: Unsplash"
 imageDescription: "Symbolbild für erneuerbare Energien"
 imageAlt: "Erneuerbare Energieanlagen in der Natur"
 tags:

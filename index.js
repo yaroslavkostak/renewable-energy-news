@@ -6,7 +6,7 @@
  */
 
 import 'dotenv/config';
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
@@ -14,6 +14,7 @@ import Parser from 'rss-parser';
 import * as cheerio from 'cheerio';
 import axios from 'axios';
 import OpenAI from 'openai';
+import matter from 'gray-matter';
 import { config } from './config.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -70,7 +71,29 @@ async function fetchPage(url) {
   return { text: text.slice(0, 50000), imageUrl, sourceName };
 }
 
-// --- Stock image (Unsplash) when article has no image
+// --- Placeholder = kein echtes Bild (z.B. blank.gif)
+const PLACEHOLDER_PATTERNS = /blank\.gif|placeholder|1x1\.(gif|png|jpg)|pixel\.|spacer\.|data:image\/svg/i;
+function isPlaceholderImage(url) {
+  if (!url || typeof url !== 'string') return true;
+  return PLACEHOLDER_PATTERNS.test(url);
+}
+
+// --- Fallback-Bilder (ohne API), zufällig wählen
+const STOCK_IMAGE_URLS = [
+  'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800',
+  'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800',
+  'https://images.unsplash.com/photo-1559302504-64aae0ca2a3d?w=800',
+  'https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=800',
+  'https://images.unsplash.com/photo-1541872703-74c32c0f64b2?w=800',
+  'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=800',
+  'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800',
+  'https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=800',
+];
+function getRandomStockImage() {
+  const url = STOCK_IMAGE_URLS[Math.floor(Math.random() * STOCK_IMAGE_URLS.length)];
+  return { imageUrl: url, imageSource: 'Unsplash' };
+}
+
 function keywordFromText(titleOrText) {
   const s = (titleOrText || '').replace(/[^\w\säöüÄÖÜß-]/gi, ' ').replace(/\s+/g, ' ').trim();
   const words = s.split(' ').filter((w) => w.length > 2).slice(0, 4);
@@ -78,21 +101,38 @@ function keywordFromText(titleOrText) {
   return 'solar panels renewable energy';
 }
 
+const STOCK_KEYWORDS = ['solar panels energy', 'wind turbine renewable', 'renewable energy landscape', 'solar power plant', 'wind energy'];
 async function fetchStockImage(keyword) {
   const key = process.env.UNSPLASH_ACCESS_KEY;
   if (!key) return null;
   try {
     const q = encodeURIComponent(keyword);
     const { data } = await axios.get(
-      `https://api.unsplash.com/search/photos?query=${q}&per_page=1&client_id=${key}`,
+      `https://api.unsplash.com/search/photos?query=${q}&per_page=5&client_id=${key}`,
       { timeout: 8000 }
     );
-    const hit = data?.results?.[0];
-    if (hit?.urls?.regular) return { imageUrl: hit.urls.regular, imageSource: 'Unsplash' };
+    const results = data?.results || [];
+    if (results.length > 0) {
+      const hit = results[Math.floor(Math.random() * results.length)];
+      if (hit?.urls?.regular) return { imageUrl: hit.urls.regular + '?w=800', imageSource: 'Unsplash' };
+    }
   } catch (err) {
     console.warn('[Unsplash]', err.message);
   }
   return null;
+}
+
+/** Versucht API mit mehreren Keywords, sonst Fallback-Liste. */
+async function fetchStockImageWithFallback(titleOrText) {
+  const keyword = keywordFromText(titleOrText);
+  let stock = await fetchStockImage(keyword);
+  if (stock) return stock;
+  for (const k of STOCK_KEYWORDS) {
+    if (k === keyword) continue;
+    stock = await fetchStockImage(k);
+    if (stock) return stock;
+  }
+  return getRandomStockImage();
 }
 
 // --- Normalize feed entry (string URL or { url, priority, category, name })
@@ -191,6 +231,37 @@ function sortByPriority(items) {
   return [...items].sort((a, b) => (a.priority ?? 3) - (b.priority ?? 3) || (a.url || '').localeCompare(b.url || ''));
 }
 
+// --- Interleave by source (hostname) so not all items are from the first feed
+function interleaveBySource(items) {
+  if (items.length <= 1) return items;
+  const byHost = new Map();
+  for (const item of items) {
+    let host = '';
+    try {
+      host = new URL(item.url).hostname;
+    } catch {
+      host = item.url || 'other';
+    }
+    if (!byHost.has(host)) byHost.set(host, []);
+    byHost.get(host).push(item);
+  }
+  const groups = [...byHost.values()];
+  const result = [];
+  let idx = 0;
+  while (true) {
+    let any = false;
+    for (const arr of groups) {
+      if (idx < arr.length) {
+        result.push(arr[idx]);
+        any = true;
+      }
+    }
+    if (!any) break;
+    idx++;
+  }
+  return result;
+}
+
 // --- Filter out purely political content (keep subsidy, law, price)
 const POLITICAL_BLACKLIST = /\b(partei|parteien|wahl|wahlen|debatt?e|koalition|opposition|abgeordnet|mandat)\b/i;
 const KEEP_TOPICS = /\b(subvention|förderung|gesetz|verordnung|preis|tarif|kosten|batterie|solar|wind|pv|speicher|energie|netz|strom)\b/i;
@@ -229,8 +300,8 @@ Wichtig – nur umformulieren, nicht aufblähen:
 ${ARTICLE_STYLE}
 
 Struktur:
-- H1, ein kurzer Einleitungsabsatz, dann 2–5 H2-Abschnitte (nicht mehr). Pro Abschnitt unterschiedlich viele Absätze: mal 2, mal 3, mal 4 – nicht alle Abschnitte gleich, wirkt sonst schablonenhaft. Länge variieren (mal kürzer, mal länger). Ziel: redaktioneller Nachrichtenartikel.
-- "Inhaltsübersicht": nur wenn der Artikel mindestens 3 H2 hat; toc = exakt die H2-Überschriften im gleichen Wortlaut wie im body (keine Slugs).
+- H1, ein kurzer Einleitungsabsatz, dann 2–5 H2-Abschnitte. **Wichtig:** Pro H2-Abschnitt mindestens 2, höchstens 4 Absätze – und die Anzahl muss von Abschnitt zu Abschnitt zufällig wechseln (z.B. erster H2 drei Absätze, zweiter H2 zwei Absätze, dritter H2 vier Absätze). Niemals nur ein Absatz pro Überschrift. Kein festes Muster wie "jeweils ein Absatz". Länge der Absätze variieren (mal kürzer, mal länger). Ziel: redaktioneller Nachrichtenartikel, nicht Schablone.
+- "Inhaltsübersicht": nur wenn der Artikel mindestens 3 H2 hat; toc = exakt die H2-Überschriften im gleichen Wortlaut wie im body (keine Slugs). Jede H2-Überschrift nur einmal – keine doppelten Überschriften im body und in toc.
 - Am Ende ein Schlussabschnitt mit einer inhaltlichen H2-Überschrift wie die anderen (z.B. "Bedeutung der Modernisierung für Österreich") – kein generisches "Fazit" oder "Umfassende Gedanken", sondern eine echte Überschrift zum Inhalt in "schlussAbschnitt" angeben. "Häufige Fragen" weglassen – bei normalen Nachrichten wirkt FAQ wie Verkauf. Nur bei ausdrücklichen FAQ-Guides 1–3 Einträge; sonst faq immer leeres Array.
 - Österreich-Bezug wo passend.
 
@@ -259,7 +330,7 @@ Antworte ausschließlich mit einem JSON-Objekt (kein anderer Text davor oder dan
 - "h1": string (Hauptüberschrift, ohne : ; — –)
 - "intro": string (kurzer Einleitungsabsatz mit österreichischem Bezug wo sinnvoll, ohne : ; — –)
 - "toc": string[] (nur wenn Artikel mindestens 3 H2 hat, exakt die H2-Überschriften wie im body, keine Slugs, sonst leeres Array; jede Überschrift ohne : ; — –)
-- "body": string (Markdown: 2–5 H2, pro H2 unterschiedlich 2–4 Absätze, Fließtext, maximal 5 Links [Text](URL), davon 1–2 ausgehend, nie in Überschriften, nie am Absatzanfang; im gesamten body keine Zeichen : ; — –)
+- "body": string (Markdown: 2–5 H2. Pro H2 zwingend 2, 3 oder 4 Absätze – zufällig gemischt, z.B. H2a mit 3 Absätzen, H2b mit 2, H2c mit 4. Nie nur 1 Absatz pro H2. Fließtext, maximal 5 Links [Text](URL), davon 1–2 ausgehend, nie in Überschriften; im body keine Zeichen : ; — –)
 - "schlussAbschnitt": string (inhaltsbezogene Schluss-Überschrift wie die anderen H2, z.B. "Bedeutung der Modernisierung für Österreich" oder "Ausblick auf die Versorgungssicherheit" – kein generisches "Fazit" oder "Umfassende Gedanken", ohne : ; — –)
 - "umfassendeGedanken": string (Inhalt des Schlussabschnitts, ohne : ; — –)
 - "faq": string[] (für normale Nachrichten immer leeres Array []; nur bei ausdrücklichen FAQ-Guides 1–3 Einträge "Frage|Antwort")
@@ -331,11 +402,14 @@ function sanitizePayloadNoColonSemicolonDash(payload) {
 // --- Build Markdown with frontmatter
 function buildMarkdown(payload, meta) {
   const date = new Date().toISOString().slice(0, 10);
+  const now = new Date();
+  const timeStr = now.toISOString().slice(11, 16);
   const frontmatter = {
     title: payload.seoTitle,
     description: payload.seoDescription,
     slug: payload.slug,
     date,
+    time: timeStr,
     category: meta.category || 'global',
     ...(meta.imageUrl && { image: meta.imageUrl }),
     ...(payload.imageAttribution && { imageAttribution: payload.imageAttribution }),
@@ -381,6 +455,30 @@ function saveArticle(slug, date, markdown) {
   return path;
 }
 
+// --- Vor Deploy: Alle Artikel mit Bild versehen (kein Platzhalter)
+function ensureAllArticlesHaveImages() {
+  const dir = join(__dirname, config.articlesDir);
+  if (!existsSync(dir)) return 0;
+  const files = readdirSync(dir).filter((f) => f.endsWith('.md'));
+  let fixed = 0;
+  for (const file of files) {
+    const path = join(dir, file);
+    const raw = readFileSync(path, 'utf8');
+    const { data, content } = matter(raw);
+    if (!data.image || isPlaceholderImage(data.image)) {
+      const { imageUrl } = getRandomStockImage();
+      data.image = imageUrl;
+      data.imageAttribution = data.imageAttribution || 'Quelle: Unsplash';
+      data.imageDescription = data.imageDescription || 'Erneuerbare Energie';
+      data.imageAlt = data.imageAlt || 'Erneuerbare Energie';
+      writeFileSync(path, matter.stringify(content, data, { lineWidth: 1000 }), 'utf8');
+      fixed++;
+      console.log(`[Image fix] ${file}`);
+    }
+  }
+  return fixed;
+}
+
 // --- Git: add, commit, push
 function gitPush(message) {
   const branch = config.gitBranch;
@@ -418,6 +516,7 @@ async function main() {
   const allItems = [...rssItems, ...scrapeItems];
   let newItems = filterNewItems(allItems, processedSet);
   newItems = sortByPriority(newItems);
+  newItems = interleaveBySource(newItems);
 
   const maxPerRun = feeds.maxArticlesPerRun ?? 40;
   if (newItems.length > maxPerRun) {
@@ -458,14 +557,11 @@ async function main() {
       continue;
     }
     let imageSource = '';
-    if (!imageUrl && process.env.UNSPLASH_ACCESS_KEY) {
-      const keyword = keywordFromText(item.title || rawText);
-      const stock = await fetchStockImage(keyword);
-      if (stock) {
-        imageUrl = stock.imageUrl;
-        imageSource = stock.imageSource || 'Unsplash';
-        console.log(`[Image] Stock (${imageSource}): ${keyword}`);
-      }
+    if (!imageUrl || isPlaceholderImage(imageUrl)) {
+      const stock = await fetchStockImageWithFallback(item.title || rawText);
+      imageUrl = stock.imageUrl;
+      imageSource = stock.imageSource || 'Unsplash';
+      console.log(`[Image] Stock (${imageSource}): ${imageUrl ? 'ok' : 'fallback'}`);
     }
     const meta = { url: item.url, sourceName, imageUrl, imageSource, category: item.category, priority: item.priority };
     try {
@@ -484,10 +580,16 @@ async function main() {
   const newProcessed = [...processedSet];
   saveProcessedLinks(newProcessed);
 
-  const hasChanges = created.length > 0 || newProcessed.length !== processed.length;
+  const imageFixCount = ensureAllArticlesHaveImages();
+  const hasChanges = created.length > 0 || newProcessed.length !== processed.length || imageFixCount > 0;
   if (hasChanges) {
-    gitPush(created.length > 0 ? `Auto: ${created.length} neue Artikel (${date})` : `Auto: processed_links aktualisiert (${date})`);
-    console.log('[Done] Created:', created.length, 'articles; processed links:', newProcessed.length);
+    const msg = created.length > 0
+      ? `Auto: ${created.length} neue Artikel (${date})`
+      : imageFixCount > 0
+        ? `Auto: Bilder ergänzt (${imageFixCount} Artikel)`
+        : `Auto: processed_links aktualisiert (${date})`;
+    gitPush(msg);
+    console.log('[Done] Created:', created.length, 'articles; image fixes:', imageFixCount, '; processed links:', newProcessed.length);
   } else {
     console.log('[Done] No changes to commit.');
   }
