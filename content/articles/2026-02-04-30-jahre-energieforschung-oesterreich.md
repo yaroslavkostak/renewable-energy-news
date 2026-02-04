@@ -4,7 +4,7 @@ description: "Michael Schneeberger über die Herausforderungen und Entwicklungen
 slug: "30-jahre-energieforschung-oesterreich"
 date: "2026-02-04"
 category: "austria"
-image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800"
+image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&h=450&fit=crop"
 imageAttribution: "Quelle: Unsplash"
 imageDescription: "Die Energiewende in Österreich"
 imageAlt: "Grafik zur Energiewende in Österreich"

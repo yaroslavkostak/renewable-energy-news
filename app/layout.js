@@ -1,4 +1,5 @@
 import './globals.css';
+import Link from 'next/link';
 import { getPopularTags, CATEGORY_LABELS } from '../lib/articles';
 import Header from './Header';
 
@@ -53,15 +54,15 @@ export default async function RootLayout({ children }) {
                 )}
             </div>
             <div className="footer-links">
-              <a href="#">Über uns</a>
+              <Link href="/ueber-uns">Über uns</Link>
               <span>·</span>
-              <a href="#">Datenschutz</a>
+              <Link href="/datenschutz">Datenschutz</Link>
               <span>·</span>
-              <a href="#">Impressum</a>
+              <Link href="/impressum">Impressum</Link>
             </div>
           </aside>
           <footer className="site-footer">
-            <p className="site-footer-desc">Aktuelle Nachrichten zu Solar, Wind und erneuerbarer Energie für den österreichischen Markt – kurz zusammengefasst und redaktionell aufbereitet.</p>
+            <p className="site-footer-desc">Aktuelle Nachrichten zu Solar, Wind und erneuerbarer Energie für den österreichischen Markt – kurz zusammengefasst und redaktionell aufbereitet. Rein informativ, ohne Anspruch auf Vollständigkeit oder Richtigkeit.</p>
             <p className="site-footer-copy">© {new Date().getFullYear()} Erneuerbare Energie</p>
           </footer>
         </div>

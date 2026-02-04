@@ -1,21 +1,21 @@
 ---
-title: "Energiepreise Maßnahmen von Minister Kocher"
-description: "Wirtschaftsminister Martin Kocher spricht über Energiepreise und Maßnahmen zur Unterstützung von Unternehmen in Österreich."
-slug: "energiepreise-maßnahmen-kocher"
-date: "2026-02-04"
-category: "austria"
-image: "https://images.unsplash.com/photo-1559302504-64aae0ca2a3d?w=800"
-imageAttribution: "Quelle: Unsplash"
-imageDescription: "Martin Kocher spricht zu Energiefragen"
-imageAlt: "Wirtschaftsminister Martin Kocher bei einem Interview zum Thema Energiepreise"
+title: Energiepreise Maßnahmen von Minister Kocher
+description: Wirtschaftsminister Martin Kocher spricht über Energiepreise und Maßnahmen zur Unterstützung von Unternehmen in Österreich.
+slug: energiepreise-maßnahmen-kocher
+date: '2026-02-04'
+category: austria
+image: 'https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=800&h=450&fit=crop'
+imageAttribution: 'Quelle: Unsplash'
+imageDescription: Martin Kocher spricht zu Energiefragen
+imageAlt: Wirtschaftsminister Martin Kocher bei einem Interview zum Thema Energiepreise
 tags:
   - Energiepreise
   - Energiekostenzuschuss
   - Versorgungssicherheit
   - Erneuerbare Energien
   - Energiepolitik
-sourceUrl: "https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/5-fragen-an-wirtschaftsminister-martin-kocher"
-sourceName: "oesterreichsenergie.at"
+sourceUrl: 'https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/5-fragen-an-wirtschaftsminister-martin-kocher'
+sourceName: oesterreichsenergie.at
 ---
 
 # Wirtschaftsminister Martin Kocher zu Energiefragen

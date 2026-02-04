@@ -1,21 +1,21 @@
 ---
-title: "Wichtigkeit der Energieforschung in Österreich"
-description: "Michael Schneeberger zu den Herausforderungen und Entwicklungen der Energieforschung in Österreich"
-slug: "energieforschung-oesterreich"
-date: "2026-02-04"
-category: "austria"
-image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800"
-imageAttribution: "Quelle: Unsplash"
-imageDescription: "Symbolbild Energieforschung"
-imageAlt: "Nachhaltige Energiesysteme in der Forschung"
+title: Wichtigkeit der Energieforschung in Österreich
+description: Michael Schneeberger zu den Herausforderungen und Entwicklungen der Energieforschung in Österreich
+slug: energieforschung-oesterreich
+date: '2026-02-04'
+category: austria
+image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&h=450&fit=crop'
+imageAttribution: 'Quelle: Unsplash'
+imageDescription: Symbolbild Energieforschung
+imageAlt: Nachhaltige Energiesysteme in der Forschung
 tags:
   - Energieforschung
   - Klimaschutz
   - Energieversorgung
   - Nachhaltigkeit
   - Energiepolitik
-sourceUrl: "https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/30-jahre-forschung-innovation-wir-brauchen-realitaetsbezug-und-gruendliche-analysen"
-sourceName: "oesterreichsenergie.at"
+sourceUrl: 'https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/30-jahre-forschung-innovation-wir-brauchen-realitaetsbezug-und-gruendliche-analysen'
+sourceName: oesterreichsenergie.at
 ---
 
 # 30 Jahre Energieforschung in Österreich

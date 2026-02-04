@@ -1,21 +1,21 @@
 ---
-title: "Fortschritte der Energiewende in Österreich"
-description: "Bundesministerin Gewessler spricht über Erfolge und Herausforderungen der Energiewende in Österreich."
-slug: "fortschritte-der-energiewende"
-date: "2026-02-04"
-category: "austria"
-image: "https://oesterreichsenergie.at/fileadmin/_processed_/8/d/csm_Gewessler_Thomas-Topf_73e574583d.jpg"
-imageAttribution: "Quelle: oesterreichsenergie.at"
-imageDescription: "Bundesministerin Leonore Gewessler bei einer Veranstaltung"
-imageAlt: "Bild von Bundesministerin Leonore Gewessler"
+title: Fortschritte der Energiewende in Österreich
+description: Bundesministerin Gewessler spricht über Erfolge und Herausforderungen der Energiewende in Österreich.
+slug: fortschritte-der-energiewende
+date: '2026-02-04'
+category: austria
+image: 'https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&h=450&fit=crop'
+imageAttribution: 'Quelle: oesterreichsenergie.at'
+imageDescription: Bundesministerin Leonore Gewessler bei einer Veranstaltung
+imageAlt: Bild von Bundesministerin Leonore Gewessler
 tags:
   - Klimaneutralität
   - Erneuerbare
   - Energiewende
   - Energiegemeinschaft
   - Photovoltaik
-sourceUrl: "https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/5-fragen-an-bundesministerin-leonore-gewessler"
-sourceName: "oesterreichsenergie.at"
+sourceUrl: 'https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/5-fragen-an-bundesministerin-leonore-gewessler'
+sourceName: oesterreichsenergie.at
 ---
 
 # Fortschritte der Energiewende in Österreich

@@ -1,13 +1,13 @@
 ---
-title: "30 Jahre EU-Beitritt und Liberalisierung"
-description: "Die Liberalisierung der Energiemärkte brachte für Österreich Vorteile. Erfahren Sie, welche Ersparnisse und Verbesserungen es gab."
-slug: "30-jahre-eu-beitritt-liberalisierung"
-date: "2026-02-04"
-category: "austria"
-image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800"
-imageAttribution: "Quelle: Unsplash"
-imageDescription: "Symbolbild zur Energiewirtschaft"
-imageAlt: "Grafik zur Energiepreisentwicklung"
+title: 30 Jahre EU-Beitritt und Liberalisierung
+description: 'Die Liberalisierung der Energiemärkte brachte für Österreich Vorteile. Erfahren Sie, welche Ersparnisse und Verbesserungen es gab.'
+slug: 30-jahre-eu-beitritt-liberalisierung
+date: '2026-02-04'
+category: austria
+image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=450&fit=crop'
+imageAttribution: 'Quelle: Unsplash'
+imageDescription: Symbolbild zur Energiewirtschaft
+imageAlt: Grafik zur Energiepreisentwicklung
 tags:
   - Energiepreise
   - Liberalisierung
@@ -15,8 +15,8 @@ tags:
   - Energiewende
   - Wettbewerb
   - EU
-sourceUrl: "https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/30-jahre-eu-beitritt-was-hat-die-liberalisierung-der-energiemaerkte-gebracht"
-sourceName: "oesterreichsenergie.at"
+sourceUrl: 'https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/30-jahre-eu-beitritt-was-hat-die-liberalisierung-der-energiemaerkte-gebracht'
+sourceName: oesterreichsenergie.at
 ---
 
 # 30 Jahre EU-Beitritt und die Folgen der Liberalisierung

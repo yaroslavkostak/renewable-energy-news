@@ -4,7 +4,7 @@ description: "Vor 20 Jahren begann die Strommarktliberalisierung in Österreich.
 slug: "20-jahre-strommarktliberalisierung"
 date: "2026-02-04"
 category: "austria"
-image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800"
+image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&h=450&fit=crop"
 imageAttribution: "Quelle: Unsplash"
 imageDescription: "Stromnetz und erneuerbare Energie"
 imageAlt: "Strommarkt und erneuerbare Energie in Österreich"

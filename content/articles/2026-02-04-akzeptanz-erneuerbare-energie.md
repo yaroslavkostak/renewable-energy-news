@@ -1,13 +1,13 @@
 ---
-title: "Akzeptanz erneuerbarer Energie in Österreich"
-description: "Studien zeigen hohe Zustimmung zu Erneuerbaren in Österreich. Akzeptanz bleibt oft bei konkreten Projekten ein Problem."
-slug: "akzeptanz-erneuerbare-energie"
-date: "2026-02-04"
-category: "austria"
-image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800"
-imageAttribution: "Quelle: Unsplash"
-imageDescription: "Symbolbild für erneuerbare Energien"
-imageAlt: "Erneuerbare Energieanlagen in der Natur"
+title: Akzeptanz erneuerbarer Energie in Österreich
+description: Studien zeigen hohe Zustimmung zu Erneuerbaren in Österreich. Akzeptanz bleibt oft bei konkreten Projekten ein Problem.
+slug: akzeptanz-erneuerbare-energie
+date: '2026-02-04'
+category: austria
+image: 'https://images.unsplash.com/photo-1624397640148-949b1732bb0a?w=800&h=450&fit=crop'
+imageAttribution: 'Quelle: Unsplash'
+imageDescription: Symbolbild für erneuerbare Energien
+imageAlt: Erneuerbare Energieanlagen in der Natur
 tags:
   - Akzeptanz
   - Bürgerbeteiligung
@@ -15,8 +15,8 @@ tags:
   - Windkraft
   - Photovoltaik
   - Energiewende
-sourceUrl: "https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/akzeptanz"
-sourceName: "oesterreichsenergie.at"
+sourceUrl: 'https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/akzeptanz'
+sourceName: oesterreichsenergie.at
 ---
 
 # Akzeptanz erneuerbarer Energie in Österreich

@@ -1,21 +1,21 @@
 ---
-title: "Herausforderungen beim Netzausbau in Österreich"
-description: "Der Netzausbau in Österreich ist entscheidend für die Energiewende und steht vor großen Herausforderungen."
-slug: "herausforderungen-netzausbau-oesterreich"
-date: "2026-02-04"
-category: "austria"
-image: "https://oesterreichsenergie.at/typo3conf/ext/kw_kwitstart/Resources/Public/Template/dist/assets/img/blank.gif"
-imageAttribution: "Quelle: Oesterreichs Energie (Oesterreichs Energie)"
-imageDescription: "Stromleitung in Österreich"
-imageAlt: "Stromleitung in Österreich zeigt die Netzinfrastruktur"
+title: Herausforderungen beim Netzausbau in Österreich
+description: Der Netzausbau in Österreich ist entscheidend für die Energiewende und steht vor großen Herausforderungen.
+slug: herausforderungen-netzausbau-oesterreich
+date: '2026-02-04'
+category: austria
+image: 'https://picsum.photos/seed/netzausbau-oesterreich/800/450'
+imageAttribution: 'Quelle: Picsum'
+imageDescription: Stromleitung in Österreich
+imageAlt: Stromleitung in Österreich zeigt die Netzinfrastruktur
 tags:
   - Netzausbau
   - Energiewende
   - Erneuerbare Energie
   - Photovoltaik
   - Versorgungssicherheit
-sourceUrl: "https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/brennpunkt-netze"
-sourceName: "oesterreichsenergie.at"
+sourceUrl: 'https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/brennpunkt-netze'
+sourceName: oesterreichsenergie.at
 ---
 
 # Herausforderungen beim Netzausbau in Österreich

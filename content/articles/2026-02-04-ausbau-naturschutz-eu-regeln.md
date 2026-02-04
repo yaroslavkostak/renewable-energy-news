@@ -1,21 +1,21 @@
 ---
-title: "Konflikte zwischen Naturschutz und Ausbau"
-description: "EU-Regeln stehen im Widerspruch zum Ausbau erneuerbarer Energien und Naturschutz in Österreich."
-slug: "ausbau-naturschutz-eu-regeln"
-date: "2026-02-04"
-category: "austria"
-image: "https://oesterreichsenergie.at/typo3conf/ext/kw_kwitstart/Resources/Public/Template/dist/assets/img/blank.gif"
-imageAttribution: "Quelle: Oesterreichs Energie"
-imageDescription: "Grafik zur Erneuerung und Infrastruktur"
-imageAlt: "Grafik zeigt Herausforderungen im Naturschutz"
+title: Konflikte zwischen Naturschutz und Ausbau
+description: EU-Regeln stehen im Widerspruch zum Ausbau erneuerbarer Energien und Naturschutz in Österreich.
+slug: ausbau-naturschutz-eu-regeln
+date: '2026-02-04'
+category: austria
+image: 'https://picsum.photos/seed/naturschutz-eu/800/450'
+imageAttribution: 'Quelle: Picsum'
+imageDescription: Grafik zur Erneuerung und Infrastruktur
+imageAlt: Grafik zeigt Herausforderungen im Naturschutz
 tags:
   - Renaturierung
   - Erneuerbare Energien
   - Naturschutz
   - Windenergie
   - Ökokonten
-sourceUrl: "https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/ausbau-vs-naturschutz-eu-regeln-im-zielkonflikt"
-sourceName: "oesterreichsenergie.at"
+sourceUrl: 'https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/ausbau-vs-naturschutz-eu-regeln-im-zielkonflikt'
+sourceName: oesterreichsenergie.at
 ---
 
 # Ausbau und Naturschutz im Zielkonflikt

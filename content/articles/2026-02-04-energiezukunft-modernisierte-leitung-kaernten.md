@@ -1,13 +1,13 @@
 ---
-title: "Energiezukunft: Modernisierte Leitung in Kärnten"
-description: "APG und Kärnten Netz modernisieren die Leitung Lienz–Obersielach für die Energiezukunft in Österreich."
-slug: "energiezukunft-modernisierte-leitung-kaernten"
-date: "2026-02-04"
-category: "austria"
-image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800"
-imageAttribution: "Quelle: Unsplash (oesterreichsenergie.at)"
-imageDescription: "Stromleitung und Landschaft"
-imageAlt: "Stromleitung in der Landschaft"
+title: 'Energiezukunft: Modernisierte Leitung in Kärnten'
+description: APG und Kärnten Netz modernisieren die Leitung Lienz–Obersielach für die Energiezukunft in Österreich.
+slug: energiezukunft-modernisierte-leitung-kaernten
+date: '2026-02-04'
+category: austria
+image: 'https://picsum.photos/seed/leitung-kaernten/800/450'
+imageAttribution: 'Quelle: Picsum'
+imageDescription: Stromleitung und Landschaft
+imageAlt: Stromleitung in der Landschaft
 tags:
   - Energiezukunft
   - Leitung
@@ -15,8 +15,8 @@ tags:
   - Erneuerbare
   - Kärnten
   - Modernisierung
-sourceUrl: "https://oesterreichsenergie.at/"
-sourceName: "oesterreichsenergie.at"
+sourceUrl: 'https://oesterreichsenergie.at/'
+sourceName: oesterreichsenergie.at
 ---
 
 # Leuchtturm der Energiezukunft in Kärnten

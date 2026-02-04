@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getArticleSlugs, getArticleBySlug, CATEGORY_LABELS, tagToSlug } from '../../../lib/articles';
 import ReactMarkdown from 'react-markdown';
+import ArticleImage from '../ArticleImage';
 
 const TOC_SKIP = ['inhaltsübersicht', 'häufige fragen'];
 
@@ -136,16 +137,11 @@ export default function ArticlePage({ params }) {
             {dateStr}{timeStr}
           </div>
           {article.image && (
-            <div style={{ marginTop: 16 }}>
-              <img
-                src={article.image}
-                alt={article.imageAlt || ''}
-                style={{ maxWidth: '100%', borderRadius: 8 }}
-              />
-              {article.imageAttribution && (
-                <p className="image-attribution">{article.imageAttribution}</p>
-              )}
-            </div>
+            <ArticleImage
+              src={article.image}
+              alt={article.imageAlt || article.title || ''}
+              attribution={article.imageAttribution}
+            />
           )}
         </header>
         <div className="article-body">

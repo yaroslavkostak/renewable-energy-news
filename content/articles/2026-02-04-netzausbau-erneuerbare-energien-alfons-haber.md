@@ -1,13 +1,13 @@
 ---
-title: "Netzausbau für erneuerbare Energien beschleunigen"
-description: "Alfons Haber von E-Control sieht Handlungsbedarf beim Netzausbau für die Energiewende in Österreich."
-slug: "netzausbau-erneuerbare-energien-alfons-haber"
-date: "2026-02-04"
-category: "austria"
-image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800"
-imageAttribution: "Quelle: Unsplash"
-imageDescription: "Alfons Haber bei einer Sitzung"
-imageAlt: "Alfons Haber von E-Control spricht über Netzfragen"
+title: Netzausbau für erneuerbare Energien beschleunigen
+description: Alfons Haber von E-Control sieht Handlungsbedarf beim Netzausbau für die Energiewende in Österreich.
+slug: netzausbau-erneuerbare-energien-alfons-haber
+date: '2026-02-04'
+category: austria
+image: 'https://images.unsplash.com/photo-1477346611705-65d1883cee1e?w=800&h=450&fit=crop'
+imageAttribution: 'Quelle: Unsplash'
+imageDescription: Alfons Haber bei einer Sitzung
+imageAlt: Alfons Haber von E-Control spricht über Netzfragen
 tags:
   - Netzausbau
   - Energiepreise
@@ -15,8 +15,8 @@ tags:
   - E-Control
   - erneuerbare Energien
   - Photovoltaik
-sourceUrl: "https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/5-fragen-an-alfons-haber"
-sourceName: "oesterreichsenergie.at"
+sourceUrl: 'https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/5-fragen-an-alfons-haber'
+sourceName: oesterreichsenergie.at
 ---
 
 # 5 Fragen an Alfons Haber von E-Control

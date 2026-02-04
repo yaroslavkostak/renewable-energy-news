@@ -1,21 +1,21 @@
 ---
-title: "Energiezukunft beim Oesterreichs Energie Kongress"
-description: "Rückblick auf den Oesterreichs Energie Kongress 2023 mit Fokus auf die Zukunft der Energieversorgung in Österreich."
-slug: "energiezukunft-oesterreichs-energie-kongress"
-date: "2026-02-04"
-category: "austria"
-image: "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=800"
-imageAttribution: "Quelle: Unsplash"
-imageDescription: "Energiekongress mit vielen Teilnehmern"
-imageAlt: "Energiekongress 2023 digital und interaktiv"
+title: Energiezukunft beim Oesterreichs Energie Kongress
+description: Rückblick auf den Oesterreichs Energie Kongress 2023 mit Fokus auf die Zukunft der Energieversorgung in Österreich.
+slug: energiezukunft-oesterreichs-energie-kongress
+date: '2026-02-04'
+category: austria
+image: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&h=450&fit=crop'
+imageAttribution: 'Quelle: Unsplash'
+imageDescription: Energiekongress mit vielen Teilnehmern
+imageAlt: Energiekongress 2023 digital und interaktiv
 tags:
   - Klimaneutralität
   - Energiewende
   - Digitalisierung
   - Versorgungssicherheit
   - Energieeffizienz
-sourceUrl: "https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/aktuelles/veranstaltungen/detailseite/kongress-mit-sicherheit-in-die-energiezukunft"
-sourceName: "oesterreichsenergie.at"
+sourceUrl: 'https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/aktuelles/veranstaltungen/detailseite/kongress-mit-sicherheit-in-die-energiezukunft'
+sourceName: oesterreichsenergie.at
 ---
 
 # Oesterreichs Energie Kongress 2023

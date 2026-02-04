@@ -4,7 +4,7 @@ description: "Feiern Sie mit uns 70 Jahre Österreichs Energie und den Wandel de
 slug: "70-jahre-oesterreichs-energie"
 date: "2026-02-04"
 category: "austria"
-image: "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=800"
+image: "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=800&h=450&fit=crop"
 imageAttribution: "Quelle: Unsplash"
 imageDescription: "Visualisierung von Stromerzeugung"
 imageAlt: "Stromerzeugung in Österreich"

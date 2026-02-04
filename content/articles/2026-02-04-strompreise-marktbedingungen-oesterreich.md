@@ -1,15 +1,15 @@
 ---
-title: "Strompreise und Marktbedingungen in Österreich"
-description: "Florian Haslauer über Strompreise Inflationsbeiträge und Wettbewerb am heimischen Energie­markt."
-slug: "strompreise-marktbedingungen-oesterreich"
-date: "2026-02-04"
-category: "austria"
-image: "https://images.unsplash.com/photo-1559302504-64aae0ca2a3d?w=800"
-imageAttribution: "Quelle: Unsplash"
-imageDescription: "Strom und erneuerbare Energie"
-imageAlt: "Strompreise und Energiemarkt in Österreich"
-sourceUrl: "https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/5-fragen-an-florian-haslauer"
-sourceName: "oesterreichsenergie.at"
+title: Strompreise und Marktbedingungen in Österreich
+description: Florian Haslauer über Strompreise Inflationsbeiträge und Wettbewerb am heimischen Energie­markt.
+slug: strompreise-marktbedingungen-oesterreich
+date: '2026-02-04'
+category: austria
+image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=800&h=450&fit=crop'
+imageAttribution: 'Quelle: Unsplash'
+imageDescription: Strom und erneuerbare Energie
+imageAlt: Strompreise und Energiemarkt in Österreich
+sourceUrl: 'https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/5-fragen-an-florian-haslauer'
+sourceName: oesterreichsenergie.at
 ---
 
 # Florian Haslauer über Strompreise und Wettbewerb

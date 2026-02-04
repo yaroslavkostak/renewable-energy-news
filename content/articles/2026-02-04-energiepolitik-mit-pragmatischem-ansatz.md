@@ -1,13 +1,13 @@
 ---
-title: "Energiepolitik mit pragmatischem Ansatz"
-description: "Bundesminister Hattmannsdorfer spricht über neue Reformen im Energiemarkt und die Herausforderungen bei Strompreisen in Österreich."
-slug: "energiepolitik-mit-pragmatischem-ansatz"
-date: "2026-02-04"
-category: "austria"
-image: "https://oesterreichsenergie.at/typo3conf/ext/kw_kwitstart/Resources/Public/Template/dist/assets/img/blank.gif"
-imageAttribution: "Quelle: Oesterreichs Energie (Thomas Topf)"
-imageDescription: "Bundesminister Hattmannsdorfer bei einem Interview"
-imageAlt: "Wolfgang Hattmannsdorfer im Gespräch über Energiepolitische Themen"
+title: Energiepolitik mit pragmatischem Ansatz
+description: Bundesminister Hattmannsdorfer spricht über neue Reformen im Energiemarkt und die Herausforderungen bei Strompreisen in Österreich.
+slug: energiepolitik-mit-pragmatischem-ansatz
+date: '2026-02-04'
+category: austria
+image: 'https://picsum.photos/seed/energiepolitik/800/450'
+imageAttribution: 'Quelle: Picsum'
+imageDescription: Bundesminister Hattmannsdorfer bei einem Interview
+imageAlt: Wolfgang Hattmannsdorfer im Gespräch über Energiepolitische Themen
 tags:
   - Energiepolitik
   - Strompreise
@@ -15,8 +15,8 @@ tags:
   - Netzausbau
   - Industriestrom
   - Förderungen
-sourceUrl: "https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/bundesminister-hattmannsdorfer-im-gespraech-keine-klimapolitik-um-jeden-strompreis"
-sourceName: "oesterreichsenergie.at"
+sourceUrl: 'https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/bundesminister-hattmannsdorfer-im-gespraech-keine-klimapolitik-um-jeden-strompreis'
+sourceName: oesterreichsenergie.at
 ---
 
 # Energiepolitik mit pragmatischem Ansatz

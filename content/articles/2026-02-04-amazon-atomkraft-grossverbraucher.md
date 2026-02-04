@@ -1,13 +1,13 @@
 ---
-title: "Amazon und Atomkraft für Großverbraucher"
-description: "Amazon scheitert mit Atomkraft-Antrag für Rechenzentrum und betont Netzauswirkungen in Österreich."
-slug: "amazon-atomkraft-grossverbraucher"
-date: "2026-02-04"
-category: "austria"
-image: "https://oesterreichsenergie.at/typo3conf/ext/kw_kwitstart/Resources/Public/Template/dist/assets/img/blank.gif"
-imageAttribution: "Quelle: Österreichs Energie"
-imageDescription: "Illustration zu Atomkraft und Energieversorgung"
-imageAlt: "Bild zur Atomkraft in der Energieversorgung"
+title: Amazon und Atomkraft für Großverbraucher
+description: Amazon scheitert mit Atomkraft-Antrag für Rechenzentrum und betont Netzauswirkungen in Österreich.
+slug: amazon-atomkraft-grossverbraucher
+date: '2026-02-04'
+category: austria
+image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=800&h=450&fit=crop'
+imageAttribution: 'Quelle: Österreichs Energie'
+imageDescription: Illustration zu Atomkraft und Energieversorgung
+imageAlt: Bild zur Atomkraft in der Energieversorgung
 tags:
   - Atomkraft
   - Energieversorgung
@@ -15,8 +15,8 @@ tags:
   - Erneuerbare Energie
   - Netzstabilität
   - Energiewende
-sourceUrl: "https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/bringen-it-grossverbraucher-die-atomkraft-zurueck"
-sourceName: "oesterreichsenergie.at"
+sourceUrl: 'https://oesterreichsenergie.at/aktuelles/neuigkeiten/detailseite/bringen-it-grossverbraucher-die-atomkraft-zurueck'
+sourceName: oesterreichsenergie.at
 ---
 
 # Amazon und Atomkraft für Großverbraucher

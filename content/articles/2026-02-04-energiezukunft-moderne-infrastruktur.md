@@ -4,7 +4,7 @@ description: "Die Modernisierung des Stromnetzes in Österreich sichert die Ener
 slug: "energiezukunft-moderne-infrastruktur"
 date: "2026-02-04"
 category: "austria"
-image: "https://images.unsplash.com/photo-1766348594383-51397b18d3e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NjgyMTd8MHwxfHNlYXJjaHwxfHxOZXVpZ2tlaXRlbkphaHJKYWhyMjAyNTIwMjQyMDIzMjAyMjIwMjEyMDIwU3VjaGVuJTIwRmlsdGVyJTIwenVyJUMzJUJDY2tzZXR6ZW4lMjBSZWRlbnxlbnwwfHx8fDE3NzAyMjM5ODB8MA&ixlib=rb-4.1.0&q=80&w=1080"
+image: "https://images.unsplash.com/photo-1766348594383-51397b18d3e0?w=800&h=450&fit=crop&q=80"
 imageAttribution: "Quelle: Unsplash"
 imageDescription: "Stromleitung und Landschaft"
 imageAlt: "Moderne Stromleitung in der Landschaft"

@@ -2,8 +2,8 @@ name: Collect & Publish News
 
 on:
   schedule:
-    # Every 3 minutes: 1 new article per run (e.g. ~3 articles in 10 min)
-    - cron: '*/3 * * * *'
+    # Every 16 min (1 article per run)
+    - cron: '*/16 * * * *'
   workflow_dispatch:
 
 jobs:

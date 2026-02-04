@@ -9,6 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "collect": "node index.js",
+    "fix-images": "node index.js --fix-images",
     "check-feeds": "node check-feeds.js"
   },
   "keywords": ["rss", "news", "openai", "markdown", "vercel"],

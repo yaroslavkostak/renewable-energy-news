@@ -1,15 +1,15 @@
 ---
-title: "Klimaneutralität Österreich 2040 – Ziele und Förderungen"
-description: "Österreich will bis 2040 klimaneutral werden. Überblick über Klima- und Energiefonds, Förderprogramme und Energiegemeinschaften."
-slug: "klimaneutralitaet-oesterreich"
-date: "2026-02-04"
-category: "austria"
-image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800"
-imageAttribution: "Quelle: Unsplash (Klima- und Energiefonds)"
-imageDescription: "Windräder und Landschaft"
-imageAlt: "Erneuerbare Energie in der Landschaft"
-sourceUrl: "https://www.klimafonds.gv.at/"
-sourceName: "Klima- und Energiefonds"
+title: Klimaneutralität Österreich 2040 – Ziele und Förderungen
+description: 'Österreich will bis 2040 klimaneutral werden. Überblick über Klima- und Energiefonds, Förderprogramme und Energiegemeinschaften.'
+slug: klimaneutralitaet-oesterreich
+date: '2026-02-04'
+category: austria
+image: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&h=450&fit=crop'
+imageAttribution: 'Quelle: Unsplash (Klima- und Energiefonds)'
+imageDescription: Windräder und Landschaft
+imageAlt: Erneuerbare Energie in der Landschaft
+sourceUrl: 'https://www.klimafonds.gv.at/'
+sourceName: Klima- und Energiefonds
 tags:
   - Klimaneutralität
   - Förderung
