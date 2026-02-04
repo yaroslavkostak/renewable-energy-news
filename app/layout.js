@@ -3,14 +3,18 @@ import Link from 'next/link';
 import { getPopularTags, CATEGORY_LABELS } from '../lib/articles';
 import Header from './Header';
 
-function getMetadataBase() {
+/** Production site URL – canonical and metadataBase match this. */
+export function getSiteBaseUrl() {
   if (process.env.NEXT_PUBLIC_SITE_URL) {
     const u = process.env.NEXT_PUBLIC_SITE_URL;
-    return new URL(u.startsWith('http') ? u : `https://${u}`);
+    return u.startsWith('http') ? u : `https://${u}`;
   }
-  if (process.env.VERCEL_URL)
-    return new URL(`https://${process.env.VERCEL_URL}`);
-  return new URL('https://renewable-energy-news.vercel.app');
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return 'https://renewable-energy-news.vercel.app';
+}
+
+function getMetadataBase() {
+  return new URL(getSiteBaseUrl());
 }
 
 export const metadata = {

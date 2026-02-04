@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getArticleSlugs, getArticleBySlug, CATEGORY_LABELS, tagToSlug } from '../../../lib/articles';
 import ReactMarkdown from 'react-markdown';
 import ArticleImage from '../ArticleImage';
+import { getSiteBaseUrl } from '../../layout';
 
 const TOC_SKIP = ['inhaltsübersicht', 'häufige fragen'];
 
@@ -67,11 +68,12 @@ export async function generateMetadata({ params }) {
       : article.date
         ? `${article.date}T12:00:00`
         : null;
+  const baseUrl = getSiteBaseUrl().replace(/\/$/, '');
   return {
     title: article.title,
     description: article.description || undefined,
     alternates: {
-      canonical: `/articles/${slug}/`,
+      canonical: `${baseUrl}/articles/${slug}/`,
     },
     openGraph: {
       title: article.title,
