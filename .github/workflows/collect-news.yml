@@ -1,9 +1,9 @@
 name: Collect & Publish News
 
 on:
-  schedule:
-    # Every 16 min (1 article per run)
-    - cron: '*/16 * * * *'
+  # schedule disabled – run only manually
+  # schedule:
+  #   - cron: '*/16 * * * *'
   workflow_dispatch:
 
 jobs:
