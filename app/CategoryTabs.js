@@ -4,7 +4,6 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
 const CATEGORIES = [
-  { slug: '', label: 'Hauptseite' },
   { slug: 'austria', label: 'Österreich' },
   { slug: 'germany', label: 'Deutschland / DACH' },
   { slug: 'global', label: 'Global' },

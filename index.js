@@ -378,7 +378,8 @@ Wichtig – nur umformulieren, nicht aufblähen:
 ${ARTICLE_STYLE}
 
 Struktur:
-- H1, ein kurzer Einleitungsabsatz, dann 2–5 H2-Abschnitte. **Wichtig:** Pro H2-Abschnitt mindestens 2, höchstens 4 Absätze – und die Anzahl muss von Abschnitt zu Abschnitt zufällig wechseln (z.B. erster H2 drei Absätze, zweiter H2 zwei Absätze, dritter H2 vier Absätze). Niemals nur ein Absatz pro Überschrift. Kein festes Muster wie "jeweils ein Absatz". Länge der Absätze variieren (mal kürzer, mal länger). Ziel: redaktioneller Nachrichtenartikel, nicht Schablone.
+- H1, ein kurzer Einleitungsabsatz, dann **2–4 H2-Abschnitte** (nicht mehr – bei kurzen Meldungen nur 2–3). Im Feld "body" **alle Abschnittsüberschriften zwingend mit genau zwei Rauten (## ) schreiben, niemals mit einer Raute (# ).** Eine Raute (#) ist nur für den Titel (h1) reserviert.
+- **Wichtig:** Pro H2-Abschnitt mindestens 2, höchstens 4 Absätze – die Anzahl **bewusst von Abschnitt zu Abschnitt variieren** (z.B. erster H2 drei Absätze, zweiter H2 zwei, dritter H2 vier). Kein schematisches Muster "Überschrift, zwei Absätze, Überschrift, zwei Absätze". Absatzlänge variieren (mal kürzer, mal länger). Ziel: redaktioneller Artikel, nicht Schablone.
 - **Unter jeder H2 nur Fließtext (Absätze).** Niemals unter einer H2 eine Aufzählung oder Bullet-Liste, die Überschriften oder TOC-Einträge wiederholt (z.B. keine Liste mit "Modelle der CO2-Bepreisung", "Beispiele aus Europa" usw.). Die Inhaltsübersicht steht nur einmal oben – im body keine Wiederholung der Überschriften als Liste.
 - "Inhaltsübersicht": nur wenn der Artikel mindestens 3 H2 hat; toc = exakt die H2-Überschriften im gleichen Wortlaut wie im body (keine Slugs). Jede H2-Überschrift nur einmal – keine doppelten Überschriften im body und in toc.
 - Am Ende ein Schlussabschnitt mit einer inhaltlichen H2-Überschrift wie die anderen (z.B. "Bedeutung der Modernisierung für Österreich") – kein generisches "Fazit" oder "Umfassende Gedanken", sondern eine echte Überschrift zum Inhalt in "schlussAbschnitt" angeben. "Häufige Fragen" weglassen – bei normalen Nachrichten wirkt FAQ wie Verkauf. Nur bei ausdrücklichen FAQ-Guides 1–3 Einträge; sonst faq immer leeres Array.
@@ -409,7 +410,7 @@ Antworte ausschließlich mit einem JSON-Objekt (kein anderer Text davor oder dan
 - "h1": string (Hauptüberschrift, ohne : ; — –)
 - "intro": string (kurzer Einleitungsabsatz mit österreichischem Bezug wo sinnvoll, ohne : ; — –)
 - "toc": string[] (nur wenn Artikel mindestens 3 H2 hat, exakt die H2-Überschriften wie im body, keine Slugs, sonst leeres Array; jede Überschrift ohne : ; — –)
-- "body": string (Markdown: 2–5 H2. Pro H2 zwingend 2, 3 oder 4 Absätze – nur Fließtext, keine Listen die Überschriften/TOC wiederholen. Nie unter einer H2 eine Bullet-Liste mit Section-Titeln. **Mindestens 1, bis zu 5 Links** [Text](URL) im Fließtext, nie in Überschriften; im body keine Zeichen : ; — –)
+- "body": string (Markdown: **nur ## (zwei Rauten) für Abschnittsüberschriften**, nie #. 2–4 H2-Abschnitte. Pro H2 zwingend 2, 3 oder 4 Absätze – Anzahl variieren, kein Muster "jeweils zwei Absätze". Nur Fließtext, keine Listen die Überschriften wiederholen. **Mindestens 1, bis zu 5 Links** [Text](URL) im Fließtext, nie in Überschriften; im body keine Zeichen : ; — –)
 - "schlussAbschnitt": string (inhaltsbezogene Schluss-Überschrift wie die anderen H2, z.B. "Bedeutung der Modernisierung für Österreich" oder "Ausblick auf die Versorgungssicherheit" – kein generisches "Fazit" oder "Umfassende Gedanken", ohne : ; — –)
 - "umfassendeGedanken": string (Inhalt des Schlussabschnitts, ohne : ; — –)
 - "faq": string[] (für normale Nachrichten immer leeres Array []; nur bei ausdrücklichen FAQ-Guides 1–3 Einträge "Frage|Antwort")
@@ -478,6 +479,12 @@ function sanitizePayloadNoColonSemicolonDash(payload) {
   return payload;
 }
 
+/** In body, section headings must be ##. If AI returns single #, normalize to ##. */
+function normalizeBodyHeadings(body) {
+  if (!body || typeof body !== 'string') return body;
+  return body.replace(/^# ([^#\n].*)$/gm, '## $1');
+}
+
 /** Remove paragraphs that are only bullet lists repeating TOC/H2 titles (duplicate Inhaltsübersicht). */
 function stripDuplicateTocListsFromBody(body, toc = []) {
   const titles = new Set([...(toc || [])].map((t) => t.trim()));
@@ -530,7 +537,7 @@ function buildMarkdown(payload, meta) {
     body += '## Inhaltsübersicht\n\n';
     body += payload.toc.map((h) => `- ${h}`).join('\n') + '\n\n';
   }
-  body += stripDuplicateTocListsFromBody(payload.body || '', payload.toc) + '\n\n';
+  body += stripDuplicateTocListsFromBody(normalizeBodyHeadings(payload.body || ''), payload.toc) + '\n\n';
   const closingTitle = payload.schlussAbschnitt || 'Umfassende Gedanken';
   body += `## ${closingTitle}\n\n${payload.umfassendeGedanken}\n`;
   if (payload.faq && Array.isArray(payload.faq) && payload.faq.length > 0) {

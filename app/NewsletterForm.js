@@ -2,8 +2,11 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 export default function NewsletterForm() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState('');
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
@@ -26,6 +29,8 @@ export default function NewsletterForm() {
       setStatus('error');
     }
   }
+
+  if (pathname === '/' && searchParams.get('q')) return null;
 
   if (status === 'success') {
     return (

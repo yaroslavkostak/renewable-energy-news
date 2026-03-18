@@ -1,13 +1,31 @@
 'use client';
 
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { Sparkles, Search } from 'lucide-react';
+import { Sparkles, Search, X } from 'lucide-react';
 
 export default function Header({ categories = [] }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentCat = pathname === '/' ? (searchParams.get('cat') || '') : null;
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (searchOpen) {
+      inputRef.current?.focus();
+    }
+  }, [searchOpen]);
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+    window.location.href = `/?q=${encodeURIComponent(searchQuery.trim())}`;
+    setSearchOpen(false);
+    setSearchQuery('');
+  };
 
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-next-3">
@@ -37,9 +55,35 @@ export default function Header({ categories = [] }) {
             </div>
           )}
         </div>
-        <div className="flex items-center shrink-0">
-          <button type="button" className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-next-2 text-dark-4 hover:bg-gray-next-3 hover:text-dark transition-colors" aria-label="Suche">
-            <Search size={18} />
+        <div className="flex items-center justify-end gap-1 min-w-0">
+          <form
+            onSubmit={handleSearchSubmit}
+            className={`overflow-hidden transition-[width] duration-300 ease-out flex items-center ${searchOpen ? 'w-40 sm:w-56' : 'w-0'}`}
+          >
+            <input
+              ref={inputRef}
+              type="search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Artikel durchsuchen…"
+              className="w-40 sm:w-56 min-w-0 h-9 pl-3 pr-3 text-sm text-dark placeholder:text-dark-3 bg-gray-next-2 rounded-full border-0 outline-none"
+              aria-label="Suchbegriff"
+            />
+          </form>
+          <button
+            type="button"
+            onClick={() => {
+              if (searchOpen) {
+                setSearchOpen(false);
+                setSearchQuery('');
+              } else {
+                setSearchOpen(true);
+              }
+            }}
+            className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-next-2 text-dark-4 hover:bg-gray-next-3 hover:text-dark transition-colors shrink-0"
+            aria-label={searchOpen ? 'Suche schließen' : 'Suche öffnen'}
+          >
+            {searchOpen ? <X size={18} /> : <Search size={18} />}
           </button>
         </div>
       </div>

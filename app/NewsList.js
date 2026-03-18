@@ -61,7 +61,7 @@ export default function NewsList({ articles }) {
                 href={`/articles/${a.slug}`}
                 className="block no-underline hover:no-underline text-inherit [&>*]:no-underline"
               >
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[16/10] overflow-hidden">
                   {a.image ? (
                     <img
                       src={a.image}
@@ -74,18 +74,18 @@ export default function NewsList({ articles }) {
                     </div>
                   )}
                 </div>
-                <div className="p-5 sm:p-6">
-                  <h3 className="font-bold text-lg sm:text-xl mb-2 leading-tight text-dark line-clamp-2 group-hover:text-primary transition-colors">
+                <div className="p-3 sm:p-4">
+                  <h3 className="font-bold text-lg sm:text-xl mb-1.5 leading-tight text-dark line-clamp-2 group-hover:text-primary transition-colors">
                     {a.title}
                   </h3>
                   {excerpt && (
-                    <p className="text-body text-sm mb-4 line-clamp-2 leading-relaxed">
+                    <p className="text-body text-sm mb-2 line-clamp-2 leading-relaxed">
                       {excerpt}
                     </p>
                   )}
                 </div>
               </Link>
-              <div className="flex items-center justify-between gap-3 px-5 sm:px-6 pb-5 sm:pb-6 pt-5 border-t border-gray-next-3 text-xs text-dark-3">
+              <div className="flex items-center justify-between gap-3 px-3 sm:px-4 pb-3 sm:pb-4 pt-3 border-t border-gray-next-3 text-xs text-dark-3">
                 <div className="flex items-center gap-2 min-w-0">
                   <Link href="/autor" className="flex items-center gap-2 no-underline text-inherit hover:text-primary transition-colors shrink-0">
                     <img src={author.image} alt="" className="w-6 h-6 rounded-full object-cover border border-white shadow-sm flex-shrink-0" />

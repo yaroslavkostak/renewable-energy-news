@@ -8,18 +8,27 @@ import { Calendar, Clock } from 'lucide-react';
 const TOC_SKIP = ['inhaltsübersicht', 'häufige fragen'];
 const CAT_ORDER = ['austria', 'germany', 'global', 'science'];
 
-function extractH2FromContent(content) {
+/** Extract all ## (H2) and # (H1) headings for TOC. Skips first # (duplicate title) and TOC_SKIP. */
+function extractTocHeadings(content) {
   if (!content) return [];
-  const re = /^## (.+)$/gm;
+  const re = /^(#)\s+(.+)$|^(##)\s+(.+)$/gm;
   const out = [];
+  let firstH1Skipped = false;
   let m;
   while ((m = re.exec(content)) !== null) {
-    const title = m[1].trim();
+    const isH1 = m[1] === '#';
+    const title = (m[2] || m[4] || '').trim();
     const lower = title.toLowerCase();
     if (TOC_SKIP.some((s) => lower.includes(s))) continue;
+    if (isH1) {
+      if (!firstH1Skipped) {
+        firstH1Skipped = true;
+        continue;
+      }
+    }
     out.push({ title, slug: tagToSlug(title) });
   }
-  return out;
+  return out.filter((h, i, arr) => arr.findIndex((x) => x.slug === h.slug) === i);
 }
 
 function contentWithoutTocBlock(content) {
@@ -103,7 +112,9 @@ export default async function ArticlePage({ params }) {
   }
 
   const allArticles = getArticlesList();
-  const recentPosts = allArticles.filter((a) => a.slug !== article.slug).slice(0, 5);
+  const otherPosts = allArticles.filter((a) => a.slug !== article.slug);
+  const recentPosts = otherPosts.slice(0, 5);
+  const morePosts = otherPosts.slice(5, 8);
   const categoryCounts = CAT_ORDER.map((c) => ({ slug: c, label: CATEGORY_LABELS[c], count: allArticles.filter((a) => a.category === c).length }));
 
   const dateStr = article.date
@@ -111,10 +122,14 @@ export default async function ArticlePage({ params }) {
     : '';
   const readTime = estimateReadTime(article.content);
   const bodyContent = contentWithoutLeadingH1(contentWithoutTocBlock(article.content));
-  const tocHeadings = extractH2FromContent(article.content).filter((h, i, arr) => arr.findIndex((x) => x.slug === h.slug) === i);
+  const tocHeadings = extractTocHeadings(article.content);
   const showToc = tocHeadings.length >= 3;
 
   const markdownComponents = {
+    h1: ({ children, ...props }) => {
+      const id = tagToSlug(getTextFromChildren(children));
+      return <h2 id={id} className="scroll-mt-20 text-2xl font-bold text-dark mt-10 mb-4" {...props}>{children}</h2>;
+    },
     h2: ({ children, ...props }) => {
       const id = tagToSlug(getTextFromChildren(children));
       return <h2 id={id} className="scroll-mt-20 text-2xl font-bold text-dark mt-10 mb-4" {...props}>{children}</h2>;
@@ -267,7 +282,7 @@ export default async function ArticlePage({ params }) {
 
         {/* Sidebar */}
         <aside className="lg:col-span-4 space-y-8">
-          {/* Recent Posts */}
+          {/* Aktuelle Artikel – compact list */}
           <div className="bg-white border border-gray-next-3 rounded-2xl p-6 shadow-sm">
             <h3 className="text-lg font-bold mb-6 pb-2 border-b border-gray-next-3">Aktuelle Artikel</h3>
             <div className="space-y-6">
@@ -326,6 +341,53 @@ export default async function ArticlePage({ params }) {
               <Link href="/datenschutz" className="underline hover:underline hover:text-primary">Datenschutzerklärung</Link> zu.
             </p>
           </div>
+
+          {/* Weitere Artikel – cards like homepage */}
+          {morePosts.length > 0 && (
+            <div className="bg-white border border-gray-next-3 rounded-2xl p-4 shadow-sm">
+              <h3 className="text-lg font-bold mb-4 pb-2 border-b border-gray-next-3">Weitere Artikel</h3>
+              <div className="space-y-4">
+                {morePosts.map((post) => {
+                  const postDate = post.date ? new Date(post.date + 'T12:00:00').toLocaleDateString('de-AT', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
+                  const excerpt = post.description ? (post.description.length > 100 ? `${post.description.slice(0, 100).trim()}…` : post.description) : '';
+                  return (
+                    <article key={post.slug} className="group transition-shadow">
+                      <Link href={`/articles/${post.slug}`} className="block no-underline hover:no-underline text-inherit [&>*]:no-underline">
+                        <div className="aspect-[3/2] overflow-hidden rounded-lg bg-gray-next-2">
+                          {post.image ? (
+                            <img src={post.image} alt="" className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 rounded-lg" />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-dark-3 text-xs rounded-lg">{postDate}</div>
+                          )}
+                        </div>
+                        <div className="pt-3">
+                          <h4 className="font-bold text-sm mb-1.5 leading-tight text-dark line-clamp-2 group-hover:text-primary transition-colors">
+                            {post.title}
+                          </h4>
+                          {excerpt && (
+                            <p className="text-body text-xs line-clamp-2 leading-relaxed mb-3">
+                              {excerpt}
+                            </p>
+                          )}
+                          <div className="flex items-center justify-between gap-2 text-[10px] text-dark-3">
+                            <div className="flex items-center gap-1.5 min-w-0">
+                              <img src={author.image} alt="" className="w-4 h-4 rounded-full object-cover flex-shrink-0" />
+                              <span>Von {author.name}</span>
+                              <span className="text-dark-2">•</span>
+                              <span>{postDate}</span>
+                            </div>
+                            <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-primary/10 text-primary shrink-0">
+                              {CATEGORY_LABELS[post.category] || post.category}
+                            </span>
+                          </div>
+                        </div>
+                      </Link>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </aside>
       </div>
     </main>
