@@ -1,9 +1,8 @@
 name: Collect & Publish News
 
 on:
-  # schedule disabled – run only manually
-  # schedule:
-  #   - cron: '*/16 * * * *'
+  schedule:
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 jobs:

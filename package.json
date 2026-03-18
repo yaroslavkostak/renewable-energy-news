@@ -12,21 +12,33 @@
     "fix-images": "node index.js --fix-images",
     "check-feeds": "node check-feeds.js"
   },
-  "keywords": ["rss", "news", "openai", "markdown", "vercel"],
+  "keywords": [
+    "rss",
+    "news",
+    "openai",
+    "markdown",
+    "vercel"
+  ],
   "license": "MIT",
   "engines": {
     "node": "20.x"
   },
   "dependencies": {
-    "dotenv": "^16.4.5",
     "axios": "^1.7.7",
     "cheerio": "^1.0.0",
+    "dotenv": "^16.4.5",
     "gray-matter": "^4.0.3",
+    "lucide-react": "^0.577.0",
     "next": "^14.2.0",
     "openai": "^4.52.0",
     "react": "^18.2.0",
-    "react-markdown": "^9.0.1",
     "react-dom": "^18.2.0",
+    "react-markdown": "^9.0.1",
     "rss-parser": "^3.13.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.19"
   }
 }

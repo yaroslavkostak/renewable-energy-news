@@ -1,14 +1,6 @@
-'use client';
-
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import { tagToSlug } from '../lib/tagSlug';
-import { author } from '../lib/author';
-
-const INITIAL_COUNT = 12;
-const LOAD_MORE_COUNT = 10;
-const EXCERPT_LENGTH = 120;
+import { getArticlesList } from '../../lib/articles';
+import { author } from '../../lib/author';
 
 const CAT_LABEL = { austria: 'Österreich', germany: 'DACH', global: 'Global', science: 'Wissenschaft' };
 
@@ -17,46 +9,45 @@ function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('de-AT', { day: '2-digit', month: 'short', year: 'numeric' });
 }
 
-export default function NewsList({ articles }) {
-  const searchParams = useSearchParams();
-  const cat = searchParams.get('cat');
-  const tagSlug = searchParams.get('tag');
-  const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+export const metadata = {
+  title: `Autorin – ${author.name} | Erneuerbare Energie`,
+  description: author.bio,
+};
 
-  let list = articles;
-  if (cat) list = list.filter((a) => a.category === cat);
-  if (tagSlug) {
-    list = list.filter((a) =>
-      (a.tags || []).some((t) => tagToSlug(t) === tagSlug)
-    );
-  }
-
-  const visibleList = list.slice(0, visibleCount);
-  const hasMore = visibleCount < list.length;
-
-  useEffect(() => {
-    setVisibleCount(INITIAL_COUNT);
-  }, [cat, tagSlug]);
-
-  if (list.length === 0) {
-    return (
-      <p className="text-center py-12 text-dark-4">
-        {articles.length === 0
-          ? 'Noch keine Artikel. Der erste Lauf des Collectors wird bald neue Nachrichten hinzufügen.'
-          : 'Keine Artikel zu dieser Auswahl.'}
-      </p>
-    );
-  }
+export default function AutorPage() {
+  const articles = getArticlesList();
 
   return (
-    <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
-        {visibleList.map((a) => {
-          const excerpt = a.description
-            ? (a.description.length > EXCERPT_LENGTH ? `${a.description.slice(0, EXCERPT_LENGTH).trim()}…` : a.description)
-            : '';
-          return (
-            <article key={a.slug} className="group bg-white rounded-xl overflow-hidden shadow-box hover:shadow-[var(--shadow-2)] transition-shadow">
+    <main className="bg-gray-next min-h-screen w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10 w-full">
+        {/* Author Profile – centered, no frame */}
+        <div className="max-w-3xl mx-auto mb-12 sm:mb-16">
+          <div className="flex flex-col items-center text-center">
+            <div className="w-24 h-24 mb-6 rounded-full overflow-hidden border-2 border-gray-next-3">
+              <img
+                src={author.image}
+                alt={author.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <h1 className="text-3xl font-bold mb-4 text-dark">{author.name}</h1>
+            <p className="text-dark-4 text-sm font-medium mb-4">{author.role}</p>
+            <p className="text-dark-4 leading-relaxed text-sm md:text-base mb-5">
+              {author.bio}
+            </p>
+            <div className="inline-flex items-center gap-3">
+              <span className="text-dark-4 text-sm font-medium">Artikel</span>
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-next-2 text-dark-4 text-sm font-semibold">
+                {articles.length}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Blog Grid – tiles */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
+          {articles.map((a) => (
+            <article key={a.slug} className="group bg-white rounded-xl overflow-hidden border border-gray-next-3 hover:border-gray-next-3 hover:shadow-sm transition-shadow">
               <Link
                 href={`/articles/${a.slug}`}
                 className="block no-underline hover:no-underline text-inherit [&>*]:no-underline"
@@ -78,9 +69,9 @@ export default function NewsList({ articles }) {
                   <h3 className="font-bold text-lg sm:text-xl mb-2 leading-tight text-dark line-clamp-2 group-hover:text-primary transition-colors">
                     {a.title}
                   </h3>
-                  {excerpt && (
+                  {a.description && (
                     <p className="text-body text-sm mb-4 line-clamp-2 leading-relaxed">
-                      {excerpt}
+                      {a.description}
                     </p>
                   )}
                 </div>
@@ -99,25 +90,9 @@ export default function NewsList({ articles }) {
                 </span>
               </div>
             </article>
-          );
-        })}
+          ))}
+        </div>
       </div>
-      {!hasMore && list.length > INITIAL_COUNT && (
-        <div className="flex justify-center mb-24">
-          <span className="text-sm text-dark-4">Alle Artikel geladen.</span>
-        </div>
-      )}
-      {hasMore && list.length > 0 && (
-        <div className="flex justify-center mb-24">
-          <button
-            type="button"
-            onClick={() => setVisibleCount((n) => Math.min(n + LOAD_MORE_COUNT, list.length))}
-            className="bg-primary text-white px-8 py-3 rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity"
-          >
-            Mehr laden
-          </button>
-        </div>
-      )}
-    </>
+    </main>
   );
 }

@@ -12,7 +12,8 @@ export default function DatenschutzPage() {
       <h1>Datenschutz</h1>
       <p>Der Schutz Ihrer Daten ist uns wichtig. Diese Website ist ein <strong>rein informatives Angebot</strong>.</p>
       <p><strong>Erhobene Daten:</strong> Beim Besuch der Seite können technisch bedingt Zugriffsdaten (z. B. IP-Adresse, aufgerufene Seite, Browser, Zeitpunkt) an den Betreiber bzw. den Hosting-Dienst (z. B. Vercel) übermittelt werden. Eine personenbezogene Auswertung zu Werbezwecken erfolgt nicht.</p>
-      <p><strong>Keine Registrierung, keine Newsletter:</strong> Es werden keine Kontaktformulare, Anmeldungen oder Newsletter angeboten. Es werden keine Cookies zu Tracking- oder Werbezwecken gesetzt.</p>
+      <p><strong>Newsletter (freiwillig):</strong> Wenn Sie unseren Newsletter abonnieren, speichern wir Ihre E-Mail-Adresse ausschließlich zum Versand von Neuigkeiten zu dieser Website. Die Anmeldung erfolgt nur mit Ihrer Einwilligung. Sie können die Einwilligung jederzeit widerrufen (z. B. per E-Mail an die im Impressum genannte Adresse); Ihre Daten werden dann gelöscht. Eine Weitergabe an Dritte erfolgt nicht.</p>
+      <p><strong>Cookies:</strong> Es werden keine Cookies zu Tracking- oder Werbezwecken gesetzt.</p>
       <p><strong>Rechte:</strong> Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer Daten. Für die Ausübung wenden Sie sich an die im Impressum genannte Kontaktmöglichkeit.</p>
       <p>Maßgeblich sind die Bestimmungen der <strong>DSGVO</strong> und des österreichischen Datenschutzrechts.</p>
     </article>
