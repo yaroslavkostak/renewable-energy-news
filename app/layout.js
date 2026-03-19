@@ -50,7 +50,9 @@ export default async function RootLayout({ children }) {
           </Suspense>
           <ContentWrap>{children}</ContentWrap>
 
-          <NewsletterForm />
+          <Suspense fallback={null}>
+            <NewsletterForm />
+          </Suspense>
 
           {/* Footer */}
           <footer className="bg-white border-t border-gray-next-3 py-10 mt-auto">
