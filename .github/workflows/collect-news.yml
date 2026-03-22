@@ -1,13 +1,17 @@
+# DISABLED: automatic news collection off while retargeting site (e.g. sport).
+# To re-enable: remove `if: false` below and uncomment `schedule`.
 # Schedule runs in UTC. If nothing runs: check Actions tab → "Enable workflow" (GitHub disables after ~60 days inactivity).
 name: Collect & Publish News
 
 on:
-  schedule:
-    - cron: '7,22,37,52 * * * *'
+  # schedule:
+  #   - cron: '7,22,37,52 * * * *'
   workflow_dispatch:
 
 jobs:
   collect:
+    # Remove the next line when the new collector/theme is ready.
+    if: false
     runs-on: ubuntu-latest
     permissions:
       contents: write
